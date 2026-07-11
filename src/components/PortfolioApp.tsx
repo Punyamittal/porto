@@ -3,36 +3,52 @@
 import { AppProvider } from "@/components/providers/AppProvider";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
-import { MouseLight } from "@/components/effects/MouseLight";
 import { EasterEggs } from "@/components/effects/EasterEggs";
 import { Navigation } from "@/components/layout/Navigation";
-import { Footer } from "@/components/layout/Footer";
-import { Hero } from "@/components/sections/Hero";
-import { About } from "@/components/sections/About";
-import { Projects } from "@/components/sections/Projects";
-import { Skills } from "@/components/sections/Skills";
-import { Experience } from "@/components/sections/Experience";
-import { Achievements } from "@/components/sections/Achievements";
-import { Contact } from "@/components/sections/Contact";
+import {
+  Scene,
+  SceneExhibition,
+} from "@/components/exhibition/SceneExhibition";
+import { SceneHUD } from "@/components/exhibition/SceneHUD";
+import { SceneHero } from "@/components/exhibition/scenes/SceneHero";
+import { SceneAbout } from "@/components/exhibition/scenes/SceneAbout";
+import { SceneProjects } from "@/components/exhibition/scenes/SceneProjects";
+import { SceneExperience } from "@/components/exhibition/scenes/SceneExperience";
+import { SceneResearch } from "@/components/exhibition/scenes/SceneResearch";
+import { SceneLeadership } from "@/components/exhibition/scenes/SceneLeadership";
+import { SceneContact } from "@/components/exhibition/scenes/SceneContact";
 
 export function PortfolioApp() {
   return (
     <AppProvider>
       <LoadingScreen />
       <CustomCursor />
-      <MouseLight />
       <EasterEggs />
-      <Navigation />
-      <main id="main">
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Experience />
-        <Achievements />
-        <Contact />
-      </main>
-      <Footer />
+      <SceneExhibition>
+        <Navigation />
+        <SceneHUD />
+        <Scene id="hero">
+          <SceneHero />
+        </Scene>
+        <Scene id="about">
+          <SceneAbout />
+        </Scene>
+        <Scene id="projects">
+          <SceneProjects />
+        </Scene>
+        <Scene id="experience">
+          <SceneExperience />
+        </Scene>
+        <Scene id="research">
+          <SceneResearch />
+        </Scene>
+        <Scene id="leadership">
+          <SceneLeadership />
+        </Scene>
+        <Scene id="contact">
+          <SceneContact />
+        </Scene>
+      </SceneExhibition>
     </AppProvider>
   );
 }

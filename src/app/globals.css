@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* Exhibition mode — cinematic full-viewport scenes */
+html.exhibition-mode,
+html.exhibition-mode body {
+  overflow: hidden !important;
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+.exhibition-stage [data-scene] {
+  transform-origin: center center;
+}
+
+[data-scene-scroll] {
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #ff2d2d33 transparent;
+}
+
 :root {
   --black: #000000;
   --white: #ffffff;

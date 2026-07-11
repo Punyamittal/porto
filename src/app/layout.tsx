@@ -61,6 +61,9 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${pressStart.variable} ${ibmPlex.variable} h-full`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preload" href="/samurai.glb?v=3" as="fetch" crossOrigin="anonymous" />
+      </head>
       <body className="min-h-full font-display antialiased">
         <a
           href="#main"

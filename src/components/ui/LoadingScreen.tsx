@@ -20,6 +20,11 @@ export function LoadingScreen() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Warm the samurai model cache during the boot screen.
+    void fetch("/samurai.glb?v=3", { credentials: "same-origin" }).catch(() => {});
+  }, []);
+
+  useEffect(() => {
     if (!loading) return;
     const lineTimer = setInterval(() => {
       setLine((l) => Math.min(l + 1, BOOT_LINES.length - 1));

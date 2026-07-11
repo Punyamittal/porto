@@ -43,7 +43,7 @@ export function EasterEggs() {
         showToast(retroMode ? "Retro Mode OFF" : "Retro Mode ON");
       }
       if ((e.key === "t" || e.key === "T") && e.altKey) {
-        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+        window.dispatchEvent(new CustomEvent("porto:goto", { detail: "contact" }));
       }
     };
     window.addEventListener("keydown", onKey);

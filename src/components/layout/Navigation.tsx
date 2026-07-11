@@ -1,14 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Moon, Sun, Volume2, VolumeX } from "lucide-react";
-import { NAV_LINKS, SITE } from "@/data/portfolio";
-import { useActiveSection } from "@/hooks/useActiveSection";
+import { SITE } from "@/data/portfolio";
+import { NAV_SCENES, type SceneId } from "@/lib/scenes";
 import { useApp } from "@/components/providers/AppProvider";
+import { useExhibition } from "@/components/exhibition/SceneExhibition";
 import { cn } from "@/lib/utils";
 
 export function Navigation() {
-  const active = useActiveSection();
   const {
     theme,
     toggleTheme,
@@ -18,15 +17,11 @@ export function Navigation() {
     playBlip,
     retroMode,
   } = useApp();
+  const { active, goTo, animating } = useExhibition();
 
   return (
-    <motion.header
-      className="fixed top-0 right-0 left-0 z-50 border-b-[3px] border-border bg-surface/90 backdrop-blur-md"
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 120, damping: 18, delay: 0.2 }}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-2 sm:px-5">
+    <header className="fixed top-0 right-0 left-0 z-[90] border-b-[3px] border-border bg-[var(--bg)]/90 backdrop-blur-md">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-3 px-4 py-2.5 sm:px-8">
         <button
           type="button"
           onDoubleClick={() => {
@@ -34,85 +29,54 @@ export function Navigation() {
             playBlip();
           }}
           onClick={playBlip}
-          className="font-pixel glitch-hover shrink-0 border-[3px] border-border bg-fg px-2 py-1.5 text-[9px] text-bg uppercase"
-          aria-label={`${SITE.shortName} logo. Double-click to change palette.`}
-          title="Double-click to cycle palette"
+          className="font-pixel shrink-0 border-[3px] border-border bg-yellow px-2 py-1 text-[8px] text-black shadow-[2px_2px_0_var(--border)] uppercase"
+          aria-label={`${SITE.shortName} logo`}
         >
           {SITE.shortName}
-          {retroMode && <span className="ml-1 text-neon">●</span>}
+          {retroMode && <span className="ml-1 text-hot-pink">●</span>}
         </button>
 
-        <nav
-          className="hidden items-center gap-1 overflow-x-auto md:flex lg:gap-2"
-          aria-label="Primary"
-        >
-          {NAV_LINKS.map((link) => (
-            <a
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Scenes">
+          {NAV_SCENES.map((link) => (
+            <button
               key={link.id}
-              href={link.href}
-              onClick={playBlip}
+              type="button"
+              disabled={animating}
+              onClick={() => {
+                playBlip();
+                goTo(link.id as SceneId);
+              }}
               className={cn(
-                "font-pixel relative px-2 py-1 text-[8px] uppercase transition-transform hover:skew-x-[-6deg] lg:text-[9px]",
-                active === link.id ? "text-hot-pink" : "text-fg",
+                "font-pixel relative px-2 py-1 text-[7px] uppercase transition-colors",
+                active === link.id
+                  ? "bg-hot-pink text-black"
+                  : "text-[var(--fg)]/55 hover:bg-electric hover:text-black",
               )}
             >
               {link.label}
-              {active === link.id && (
-                <motion.span
-                  layoutId="nav-underline"
-                  className="absolute right-0 -bottom-0.5 left-0 h-0.5 bg-electric"
-                />
-              )}
-            </a>
+            </button>
           ))}
         </nav>
 
         <div className="flex items-center gap-1.5">
           <button
             type="button"
-            onClick={() => {
-              toggleSound();
-            }}
-            className="border-[2px] border-border bg-bg p-1.5 hover:bg-yellow"
-            aria-label={soundEnabled ? "Mute soundtrack" : "Play soundtrack"}
-            title={soundEnabled ? "Mute soundtrack" : "Play soundtrack"}
+            onClick={toggleSound}
+            className="border-[3px] border-border bg-surface p-1.5 text-[var(--fg)] shadow-[2px_2px_0_var(--border)] hover:bg-neon hover:text-black"
+            aria-label={soundEnabled ? "Mute" : "Play sound"}
           >
             {soundEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
           </button>
           <button
             type="button"
-            onClick={() => {
-              toggleTheme();
-              playBlip();
-            }}
-            className="border-[2px] border-border bg-bg p-1.5 hover:bg-neon"
-            aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+            onClick={toggleTheme}
+            className="border-[3px] border-border bg-surface p-1.5 text-[var(--fg)] shadow-[2px_2px_0_var(--border)] hover:bg-electric hover:text-black"
+            aria-label="Toggle theme"
           >
             {theme === "light" ? <Moon size={14} /> : <Sun size={14} />}
           </button>
-          <span className="font-pixel hidden border-[2px] border-border bg-electric px-2 py-1 text-[8px] text-black sm:inline">
-            SYS.OK
-          </span>
         </div>
       </div>
-
-      {/* Mobile section indicator */}
-      <div className="flex gap-1 overflow-x-auto border-t-[2px] border-border px-2 py-1 md:hidden">
-        {NAV_LINKS.map((link) => (
-          <a
-            key={link.id}
-            href={link.href}
-            className={cn(
-              "font-pixel shrink-0 px-2 py-0.5 text-[7px]",
-              active === link.id
-                ? "bg-hot-pink text-black"
-                : "bg-bg text-fg",
-            )}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
-    </motion.header>
+    </header>
   );
 }
