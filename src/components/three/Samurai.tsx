@@ -39,11 +39,12 @@ function signalDrawn() {
   window.dispatchEvent(new CustomEvent("porto:sword-drawn"));
 }
 
-function SamuraiModel() {
+function SamuraiModel({ scale = MODEL_SCALE }: { scale?: number }) {
   const { scene, animations } = useGLTF(MODEL_URL, DRACO_PATH);
   const group = useRef<Group>(null);
   const look = useRef<Group>(null);
   const mouse = useRef({ x: 0, y: 0 });
+  const isMobile = useRef(false);
   const drawingRef = useRef(false);
   const pendingDrawRef = useRef(false);
   const finishTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -55,7 +56,22 @@ function SamuraiModel() {
   const { actions, names, mixer } = useAnimations(animations, group);
 
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const sync = () => {
+      isMobile.current = mq.matches;
+      if (mq.matches) {
+        mouse.current.x = 0;
+        mouse.current.y = 0;
+      }
+    };
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
     const onMove = (e: MouseEvent) => {
+      if (isMobile.current) return;
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -((e.clientY / window.innerHeight) * 2 - 1);
     };
@@ -63,8 +79,22 @@ function SamuraiModel() {
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
-  useFrame(() => {
+  useFrame((state) => {
     if (!look.current) return;
+
+    if (isMobile.current) {
+      // Gentle idle sway — mobile only (no cursor).
+      const t = state.clock.elapsedTime;
+      const swayY = Math.sin(t * 0.7) * 0.18;
+      const swayX = Math.sin(t * 0.45) * 0.06;
+      const bobY = Math.sin(t * 0.9) * 0.04;
+      look.current.rotation.y += (swayY - look.current.rotation.y) * 0.04;
+      look.current.rotation.x += (swayX - look.current.rotation.x) * 0.04;
+      look.current.position.y += (bobY - look.current.position.y) * 0.04;
+      look.current.position.x += (0 - look.current.position.x) * 0.04;
+      return;
+    }
+
     const tx = mouse.current.x * 0.35;
     const ty = mouse.current.y * 0.18;
     look.current.rotation.y += (tx - look.current.rotation.y) * 0.06;
@@ -162,7 +192,7 @@ function SamuraiModel() {
 
   return (
     <group ref={look}>
-      <group ref={group} position={[0, -1.15, 0]} scale={MODEL_SCALE}>
+      <group ref={group} position={[0, -1.35, 0]} scale={scale}>
         <primitive object={scene} />
       </group>
     </group>
@@ -181,9 +211,24 @@ function Loader() {
   );
 }
 
-export function Samurai() {
+export function Samurai({
+  size = "responsive",
+}: {
+  size?: "sm" | "md" | "lg" | "responsive";
+}) {
+  const sizeClass =
+    size === "sm"
+      ? "h-40 w-32"
+      : size === "md"
+        ? "h-60 w-48"
+        : size === "lg"
+          ? "h-88 w-80 sm:h-[28rem] sm:w-96"
+          : "h-44 w-36 sm:h-60 sm:w-48 lg:h-[22rem] lg:w-80 xl:h-[26rem] xl:w-96";
+
+  const scale = size === "sm" ? 0.0105 : size === "md" ? 0.012 : 0.0138;
+
   return (
-    <div className="relative mx-auto h-80 w-80 overflow-visible bg-transparent sm:h-96 sm:w-96">
+    <div className={`relative mx-auto overflow-visible bg-transparent ${sizeClass}`}>
       <Canvas
         className="h-full w-full border-0 outline-none"
         style={{ background: "transparent" }}
@@ -199,7 +244,7 @@ export function Samurai() {
         <directionalLight position={[-3, 2, -2]} intensity={0.7} color="#ff6b6b" />
         <hemisphereLight args={["#ffffff", "#1a0505", 0.55]} />
         <Suspense fallback={<Loader />}>
-          <SamuraiModel />
+          <SamuraiModel scale={scale} />
         </Suspense>
       </Canvas>
     </div>

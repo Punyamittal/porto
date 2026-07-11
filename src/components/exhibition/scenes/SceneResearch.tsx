@@ -11,7 +11,7 @@ export function SceneResearch() {
   const awards = ACHIEVEMENTS.filter((a) => a.unlocked).slice(0, 6);
 
   return (
-    <div className="relative flex h-full w-full flex-col bg-fg px-4 pt-20 pb-28 text-bg sm:px-8">
+    <div className="relative flex h-full w-full flex-col bg-fg px-4 pt-[max(5rem,calc(env(safe-area-inset-top)+4rem))] pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] text-bg sm:px-8">
       <div className="pointer-events-none absolute top-20 left-4 font-pixel text-[8px] border-[3px] border-bg bg-hot-pink px-2 py-1 text-black shadow-[3px_3px_0_#fff] -rotate-3">
         LAB
       </div>
@@ -19,7 +19,7 @@ export function SceneResearch() {
         AI
       </div>
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1200px] flex-col">
+      <div className="relative z-10 mx-auto flex h-full min-h-0 w-full max-w-[1200px] flex-col">
         <p className="font-pixel text-[9px] text-neon uppercase">
           // 05 — RESEARCH & SYSTEMS
         </p>
@@ -33,7 +33,7 @@ export function SceneResearch() {
 
         <div
           data-scene-scroll
-          className="mt-5 grid min-h-0 flex-1 gap-4 overflow-y-auto pr-1 sm:grid-cols-2"
+          className="mt-5 grid min-h-0 flex-1 touch-pan-y gap-4 overflow-y-auto overscroll-y-contain pr-1 sm:grid-cols-2"
         >
           <div className="space-y-3">
             {research.map((p) => (

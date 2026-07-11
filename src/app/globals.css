@@ -16,6 +16,8 @@ html.exhibition-mode body {
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: #ff2d2d33 transparent;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 :root {

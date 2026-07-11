@@ -4,12 +4,12 @@ import { EXPERIENCE } from "@/data/portfolio";
 
 export function SceneExperience() {
   return (
-    <div className="pixel-grid-bg relative flex h-full w-full flex-col bg-[var(--bg)] px-4 pt-20 pb-28 text-[var(--fg)] sm:px-8">
+    <div className="pixel-grid-bg relative flex h-full w-full flex-col bg-[var(--bg)] px-4 pt-[max(5rem,calc(env(safe-area-inset-top)+4rem))] pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] text-[var(--fg)] sm:px-8">
       <div className="pointer-events-none absolute top-16 right-6 font-pixel text-[8px] text-hot-pink rotate-6 border-[3px] border-border bg-yellow px-2 py-1 text-black shadow-[3px_3px_0_var(--border)]">
         XP.EXE
       </div>
 
-      <div className="relative z-10 mx-auto flex h-full w-full max-w-[1100px] flex-col">
+      <div className="relative z-10 mx-auto flex h-full min-h-0 w-full max-w-[1100px] flex-col">
         <p className="font-pixel text-[9px] text-electric uppercase">
           // 04 — WORK HISTORY
         </p>
@@ -20,7 +20,7 @@ export function SceneExperience() {
 
         <div
           data-scene-scroll
-          className="mt-5 min-h-0 flex-1 space-y-3 overflow-y-auto pr-1"
+          className="mt-5 min-h-0 flex-1 touch-pan-y space-y-3 overflow-y-auto overscroll-y-contain pr-1"
         >
           {EXPERIENCE.map((e, i) => (
             <div

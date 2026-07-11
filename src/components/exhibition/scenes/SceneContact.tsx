@@ -117,7 +117,7 @@ export function SceneContact() {
   );
 
   return (
-    <div className="relative flex h-full w-full flex-col bg-[var(--bg)] px-4 pt-20 pb-28 text-[var(--fg)] sm:px-8">
+    <div className="relative flex h-full w-full flex-col bg-[var(--bg)] px-4 pt-[max(5rem,calc(env(safe-area-inset-top)+4rem))] pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] text-[var(--fg)] sm:px-8">
       <div className="pointer-events-none absolute top-16 right-5 font-pixel text-[8px] border-[3px] border-border bg-electric px-2 py-1 text-black shadow-[3px_3px_0_var(--border)] rotate-3">
         TERM
       </div>

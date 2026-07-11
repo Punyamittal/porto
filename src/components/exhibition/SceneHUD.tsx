@@ -44,11 +44,30 @@ export function SceneHUD() {
         ))}
       </div>
 
-      <div className="pointer-events-none fixed right-0 bottom-5 left-0 z-[80] flex items-center justify-between px-4 sm:px-8">
-        <p className="font-pixel text-[8px] text-[var(--fg)]/50 uppercase">
+      {/* Mobile scene dots */}
+      <div className="pointer-events-none fixed top-[max(4.25rem,calc(env(safe-area-inset-top)+3.25rem))] right-0 left-0 z-[80] flex justify-center gap-1.5 md:hidden">
+        {SCENE_IDS.map((id, i) => (
+          <button
+            key={id}
+            type="button"
+            disabled={animating}
+            onClick={() => goTo(i)}
+            className={cn(
+              "pointer-events-auto h-1.5 border border-border transition-all",
+              i === index ? "w-5 bg-hot-pink" : "w-1.5 bg-[var(--fg)]/30",
+            )}
+            aria-label={`Go to ${SCENE_META[id].label}`}
+            aria-current={i === index}
+          />
+        ))}
+      </div>
+
+      <div className="pointer-events-none fixed right-0 bottom-[max(1rem,env(safe-area-inset-bottom))] left-0 z-[80] flex items-center justify-between px-4 sm:px-8">
+        <p className="font-pixel max-w-[45%] truncate text-[7px] text-[var(--fg)]/50 uppercase sm:max-w-none sm:text-[8px]">
           <span className="text-electric">{meta.label}</span>
-          <span className="ml-3">
-            {String(index + 1).padStart(2, "0")}/{String(SCENE_IDS.length).padStart(2, "0")}
+          <span className="ml-2 sm:ml-3">
+            {String(index + 1).padStart(2, "0")}/
+            {String(SCENE_IDS.length).padStart(2, "0")}
           </span>
         </p>
 
@@ -57,7 +76,7 @@ export function SceneHUD() {
             type="button"
             disabled={animating || index === 0}
             onClick={prev}
-            className="font-pixel border-[3px] border-border bg-surface px-3 py-1.5 text-[8px] uppercase shadow-[2px_2px_0_var(--border)] disabled:opacity-25"
+            className="font-pixel min-h-9 border-[3px] border-border bg-surface px-3 py-1.5 text-[8px] uppercase shadow-[2px_2px_0_var(--border)] disabled:opacity-25"
           >
             PREV
           </button>
@@ -65,7 +84,7 @@ export function SceneHUD() {
             type="button"
             disabled={animating || index === SCENE_IDS.length - 1}
             onClick={next}
-            className="font-pixel border-[3px] border-border bg-hot-pink px-3 py-1.5 text-[8px] text-black uppercase shadow-[2px_2px_0_var(--border)] disabled:opacity-25"
+            className="font-pixel min-h-9 border-[3px] border-border bg-hot-pink px-3 py-1.5 text-[8px] text-black uppercase shadow-[2px_2px_0_var(--border)] disabled:opacity-25"
           >
             NEXT
           </button>
@@ -74,11 +93,11 @@ export function SceneHUD() {
 
       {index === 0 && (
         <motion.div
-          className="pointer-events-none fixed bottom-20 left-1/2 z-[80] -translate-x-1/2 font-pixel text-[8px] text-electric uppercase"
+          className="pointer-events-none fixed bottom-[max(4.5rem,calc(env(safe-area-inset-bottom)+3.5rem))] left-1/2 z-[80] -translate-x-1/2 font-pixel text-[7px] text-electric uppercase sm:bottom-20 sm:text-[8px]"
           animate={{ opacity: [0.35, 1, 0.35], y: [0, 6, 0] }}
           transition={{ duration: 2.2, repeat: Infinity }}
         >
-          SCROLL ▾
+          SWIPE / SCROLL ▾
         </motion.div>
       )}
     </>

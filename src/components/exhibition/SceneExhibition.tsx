@@ -41,6 +41,8 @@ export function SceneExhibition({ children }: Props) {
   const stageRef = useRef<HTMLDivElement>(null);
   const wheelLock = useRef(0);
   const touchY = useRef(0);
+  const touchStartScrollTop = useRef(0);
+  const touchInScroller = useRef(false);
   const swordReadyRef = useRef(false);
   const swordDrawingRef = useRef(false);
   const pendingIndexRef = useRef<number | null>(null);
@@ -64,18 +66,12 @@ export function SceneExhibition({ children }: Props) {
     if (nextIndex < 0 || nextIndex === indexRef.current) return;
     if (nextIndex < 0 || nextIndex >= SCENE_IDS.length) return;
 
-    // Leaving hero forward: draw sword first (desktop), then enter next scene.
-    // Skip gate on small screens where the samurai is hidden — otherwise scroll
-    // waits forever for an animation that never runs.
-    const swordVisible =
-      typeof window !== "undefined" &&
-      window.matchMedia("(min-width: 1024px)").matches;
-
+    // Leaving hero forward: draw sword first, then enter next scene.
+    // Timeout fail-open if model/CDN fails or listener isn't mounted yet.
     if (
       indexRef.current === 0 &&
       nextIndex > 0 &&
-      !swordReadyRef.current &&
-      swordVisible
+      !swordReadyRef.current
     ) {
       if (swordDrawingRef.current) return;
       pendingIndexRef.current = nextIndex;
@@ -83,7 +79,6 @@ export function SceneExhibition({ children }: Props) {
       animatingRef.current = true;
       setAnimating(true);
       window.dispatchEvent(new CustomEvent("porto:draw-sword"));
-      // Fail-open if model/CDN fails or listener isn't mounted yet (common on deploy).
       clearSwordTimeout();
       swordTimeoutRef.current = setTimeout(() => {
         if (!swordDrawingRef.current) return;
@@ -238,31 +233,56 @@ export function SceneExhibition({ children }: Props) {
     };
   }, [next, prev]);
 
-  // Touch swipe
+  // Touch swipe — never steal gestures from inner scroll lists
   useEffect(() => {
     const onStart = (e: TouchEvent) => {
       touchY.current = e.touches[0]?.clientY ?? 0;
+      const target = e.target as HTMLElement | null;
+      const scroller = target?.closest(
+        "[data-scene-scroll]",
+      ) as HTMLElement | null;
+      touchInScroller.current = !!scroller;
+      touchStartScrollTop.current = scroller?.scrollTop ?? 0;
     };
+
     const onEnd = (e: TouchEvent) => {
       if (animatingRef.current) return;
-      const target = e.target as HTMLElement | null;
-      if (target?.closest("[data-scene-scroll]")) {
-        const scroller = target.closest("[data-scene-scroll]") as HTMLElement;
-        const { scrollTop, scrollHeight, clientHeight } = scroller;
-        const canScroll = scrollHeight > clientHeight + 4;
-        const dy = touchY.current - (e.changedTouches[0]?.clientY ?? 0);
-        if (canScroll) {
-          const atTop = scrollTop <= 1;
-          const atBottom = scrollTop + clientHeight >= scrollHeight - 2;
-          if ((dy < 0 && !atTop) || (dy > 0 && !atBottom)) return;
-        }
-      }
+
       const y = e.changedTouches[0]?.clientY ?? 0;
       const dy = touchY.current - y;
       if (Math.abs(dy) < 56) return;
+
+      if (touchInScroller.current) {
+        const target = e.target as HTMLElement | null;
+        const scroller = target?.closest(
+          "[data-scene-scroll]",
+        ) as HTMLElement | null;
+
+        if (scroller) {
+          // User scrolled the project list — keep the scene.
+          if (Math.abs(scroller.scrollTop - touchStartScrollTop.current) > 4) {
+            return;
+          }
+
+          const { scrollTop, scrollHeight, clientHeight } = scroller;
+          const canScroll = scrollHeight > clientHeight + 4;
+          if (canScroll) {
+            const atTop = scrollTop <= 1;
+            const atBottom = scrollTop + clientHeight >= scrollHeight - 2;
+            // Only leave the list when already at an edge and swiping past it.
+            if (dy > 0 && !atBottom) return;
+            if (dy < 0 && !atTop) return;
+          } else {
+            // List isn't scrollable yet — still prefer PREV/NEXT on mobile.
+            if (window.matchMedia("(max-width: 767px)").matches) return;
+          }
+        }
+      }
+
       if (dy > 0) next();
       else prev();
     };
+
     window.addEventListener("touchstart", onStart, { passive: true });
     window.addEventListener("touchend", onEnd, { passive: true });
     return () => {

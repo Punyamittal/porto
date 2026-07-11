@@ -8,9 +8,9 @@ export function SceneProjects() {
   const featured = PROJECTS.slice(0, 6);
 
   return (
-    <div className="flex h-full w-full flex-col bg-[#050505] px-5 pt-20 pb-24 text-white sm:px-10">
-      <div className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col">
-        <div className="mb-6 flex items-end justify-between gap-4">
+    <div className="flex h-full min-h-0 w-full flex-col bg-[#050505] px-4 pt-[max(5rem,calc(env(safe-area-inset-top)+4rem))] pb-[max(5.5rem,calc(env(safe-area-inset-bottom)+4rem))] text-white sm:px-10">
+      <div className="mx-auto flex min-h-0 w-full max-w-[1200px] flex-1 flex-col">
+        <div className="mb-4 shrink-0 sm:mb-6">
           <div>
             <p className="font-mono text-[10px] tracking-[0.35em] text-[#FF2D2D] uppercase">
               SCENE 03 · SELECTED WORK
@@ -19,14 +19,14 @@ export function SceneProjects() {
               Projects
             </h2>
           </div>
-          <p className="hidden max-w-xs text-right text-xs text-white/40 sm:block">
-            Scroll inside the grid · scene transitions stay locked to the wheel edge
+          <p className="mt-2 text-[10px] text-white/35 sm:hidden">
+            Scroll the list · use PREV / NEXT for scenes
           </p>
         </div>
 
         <div
           data-scene-scroll
-          className="grid flex-1 gap-3 overflow-y-auto pr-1 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid min-h-0 flex-1 touch-pan-y gap-3 overflow-y-auto overscroll-y-contain [-webkit-overflow-scrolling:touch] pr-1 sm:grid-cols-2 lg:grid-cols-3"
         >
           {featured.map((p) => (
             <article

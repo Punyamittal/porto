@@ -18,7 +18,7 @@ const CyberEye = dynamic(
 
 export function SceneAbout() {
   return (
-    <div className="pixel-grid-bg relative flex h-full w-full flex-col bg-[var(--bg)] px-4 pt-20 pb-28 text-[var(--fg)] sm:px-8">
+    <div className="pixel-grid-bg relative flex h-full w-full flex-col bg-[var(--bg)] px-4 pt-[max(5rem,calc(env(safe-area-inset-top)+4rem))] pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] text-[var(--fg)] sm:px-8">
       <div className="pointer-events-none absolute top-16 right-6 font-pixel text-[8px] border-[3px] border-border bg-hot-pink px-2 py-1 text-black shadow-[3px_3px_0_var(--border)] rotate-3">
         ID.SYS
       </div>
@@ -36,8 +36,8 @@ export function SceneAbout() {
             <span className="mt-2 block h-3 w-28 bg-neon sm:h-4" />
           </h2>
 
-          <div className="relative mt-44 lg:mt-56">
-            <div className="absolute bottom-full left-1/2 z-20 mb-5 -translate-x-[35%] sm:-translate-x-[30%] lg:left-[calc(50%+10px)] lg:mb-6 lg:-translate-x-1/2">
+          <div className="relative mt-4 lg:mt-8">
+            <div className="mb-4 flex justify-center lg:mb-0 lg:absolute lg:bottom-full lg:left-1/2 lg:z-20 lg:mb-6 lg:-translate-x-1/2">
               <CyberEye />
             </div>
 
