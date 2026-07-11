@@ -73,7 +73,7 @@ export function SceneHero() {
             </span>
           </h1>
 
-          <div className="relative shrink-0">
+          <div className="relative shrink-0 lg:translate-x-[-18px] lg:translate-y-[48px]">
             <Samurai size="responsive" />
             <p className="font-mono mt-0.5 hidden text-center text-[8px] tracking-[0.28em] text-white/35 uppercase sm:mt-1 sm:block sm:text-[9px] sm:tracking-[0.3em]">
               DELHI · INDIA · EST. 2006

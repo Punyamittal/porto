@@ -36,8 +36,8 @@ export function SceneAbout() {
             <span className="mt-2 block h-3 w-28 bg-neon sm:h-4" />
           </h2>
 
-          <div className="relative mt-4 lg:mt-8">
-            <div className="mb-4 flex justify-center lg:mb-0 lg:absolute lg:bottom-full lg:left-1/2 lg:z-20 lg:mb-6 lg:-translate-x-1/2">
+          <div className="relative mt-4 lg:mt-56">
+            <div className="mb-4 flex justify-center lg:mb-0 lg:absolute lg:bottom-full lg:left-1/2 lg:z-20 lg:mb-5 lg:-translate-x-1/2">
               <CyberEye />
             </div>
 
