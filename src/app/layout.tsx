@@ -62,7 +62,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <link rel="preload" href="/samurai.glb?v=3" as="fetch" crossOrigin="anonymous" />
+        <link rel="preload" href="/samurai.glb" as="fetch" crossOrigin="anonymous" />
+        <link rel="preload" href="/draco/draco_wasm_wrapper.js" as="script" />
+        <link rel="preload" href="/draco/draco_decoder.wasm" as="fetch" crossOrigin="anonymous" />
       </head>
       <body className="min-h-full font-display antialiased">
         <a

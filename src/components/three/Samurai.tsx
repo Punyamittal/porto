@@ -10,9 +10,13 @@ import { LoopOnce, type AnimationAction, type Group, type Object3D } from "three
  * SkinnedMesh bind-pose bounds (which stretch to ~1900 and hide the character).
  */
 const MODEL_SCALE = 0.0128;
-const MODEL_URL = "/samurai.glb?v=3";
+const MODEL_URL = "/samurai.glb";
+/** Local Draco (not Google CDN) — more reliable on deployed hosts. */
+const DRACO_PATH = "/draco/";
 /** Clip is 8s — speed up so scroll doesn't wait forever. */
 const DRAW_TIME_SCALE = 2.8;
+
+useGLTF.setDecoderPath(DRACO_PATH);
 
 function hideFloor(root: Object3D) {
   root.traverse((obj) => {
@@ -31,12 +35,18 @@ function holdSheathed(action: AnimationAction) {
   action.paused = true;
 }
 
+function signalDrawn() {
+  window.dispatchEvent(new CustomEvent("porto:sword-drawn"));
+}
+
 function SamuraiModel() {
-  const { scene, animations } = useGLTF(MODEL_URL, true);
+  const { scene, animations } = useGLTF(MODEL_URL, DRACO_PATH);
   const group = useRef<Group>(null);
   const look = useRef<Group>(null);
   const mouse = useRef({ x: 0, y: 0 });
   const drawingRef = useRef(false);
+  const pendingDrawRef = useRef(false);
+  const finishTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useLayoutEffect(() => {
     hideFloor(scene);
@@ -73,30 +83,48 @@ function SamuraiModel() {
   }, [actions, names]);
 
   useEffect(() => {
+    const clearFinishTimer = () => {
+      if (finishTimerRef.current) {
+        clearTimeout(finishTimerRef.current);
+        finishTimerRef.current = null;
+      }
+    };
+
     const playDraw = () => {
-      if (drawingRef.current || !names.length) {
-        if (!names.length) {
-          window.dispatchEvent(new CustomEvent("porto:sword-drawn"));
-        }
+      if (drawingRef.current) return;
+
+      if (!names.length) {
+        // Model/animations not ready yet — queue until they are.
+        pendingDrawRef.current = true;
         return;
       }
-      drawingRef.current = true;
 
       const primary = actions[names[0]];
       if (!primary) {
-        drawingRef.current = false;
-        window.dispatchEvent(new CustomEvent("porto:sword-drawn"));
+        signalDrawn();
         return;
       }
 
-      const onFinished = (e: { action: AnimationAction }) => {
-        if (e.action !== primary) return;
+      drawingRef.current = true;
+      pendingDrawRef.current = false;
+
+      const finish = () => {
+        clearFinishTimer();
         mixer.removeEventListener("finished", onFinished);
         drawingRef.current = false;
-        window.dispatchEvent(new CustomEvent("porto:sword-drawn"));
+        signalDrawn();
+      };
+
+      const onFinished = (e: { action: AnimationAction }) => {
+        if (e.action !== primary) return;
+        finish();
       };
 
       mixer.addEventListener("finished", onFinished);
+      // Backup if the mixer 'finished' event is missed in production.
+      const durationMs = (primary.getClip().duration / DRAW_TIME_SCALE) * 1000 + 200;
+      finishTimerRef.current = setTimeout(finish, durationMs);
+
       primary.reset();
       primary.setLoop(LoopOnce, 1);
       primary.clampWhenFinished = true;
@@ -106,7 +134,9 @@ function SamuraiModel() {
     };
 
     const sheathe = () => {
+      clearFinishTimer();
       drawingRef.current = false;
+      pendingDrawRef.current = false;
       names.forEach((name) => {
         const action = actions[name];
         if (action) holdSheathed(action);
@@ -115,11 +145,20 @@ function SamuraiModel() {
 
     window.addEventListener("porto:draw-sword", playDraw);
     window.addEventListener("porto:sheathe-sword", sheathe);
+
     return () => {
+      clearFinishTimer();
       window.removeEventListener("porto:draw-sword", playDraw);
       window.removeEventListener("porto:sheathe-sword", sheathe);
     };
   }, [actions, names, mixer]);
+
+  // Flush queued draw once animations exist.
+  useEffect(() => {
+    if (!pendingDrawRef.current || !names.length) return;
+    pendingDrawRef.current = false;
+    window.dispatchEvent(new CustomEvent("porto:draw-sword"));
+  }, [names]);
 
   return (
     <group ref={look}>
@@ -167,4 +206,4 @@ export function Samurai() {
   );
 }
 
-useGLTF.preload(MODEL_URL, true);
+useGLTF.preload(MODEL_URL, DRACO_PATH);

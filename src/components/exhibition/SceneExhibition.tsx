@@ -44,8 +44,16 @@ export function SceneExhibition({ children }: Props) {
   const swordReadyRef = useRef(false);
   const swordDrawingRef = useRef(false);
   const pendingIndexRef = useRef<number | null>(null);
+  const swordTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const active = SCENE_IDS[index];
+
+  const clearSwordTimeout = () => {
+    if (swordTimeoutRef.current) {
+      clearTimeout(swordTimeoutRef.current);
+      swordTimeoutRef.current = null;
+    }
+  };
 
   const goTo = useCallback((target: SceneId | number) => {
     if (animatingRef.current) return;
@@ -56,11 +64,18 @@ export function SceneExhibition({ children }: Props) {
     if (nextIndex < 0 || nextIndex === indexRef.current) return;
     if (nextIndex < 0 || nextIndex >= SCENE_IDS.length) return;
 
-    // Leaving hero forward: draw sword first, then enter the next scene.
+    // Leaving hero forward: draw sword first (desktop), then enter next scene.
+    // Skip gate on small screens where the samurai is hidden — otherwise scroll
+    // waits forever for an animation that never runs.
+    const swordVisible =
+      typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 1024px)").matches;
+
     if (
       indexRef.current === 0 &&
       nextIndex > 0 &&
-      !swordReadyRef.current
+      !swordReadyRef.current &&
+      swordVisible
     ) {
       if (swordDrawingRef.current) return;
       pendingIndexRef.current = nextIndex;
@@ -68,6 +83,12 @@ export function SceneExhibition({ children }: Props) {
       animatingRef.current = true;
       setAnimating(true);
       window.dispatchEvent(new CustomEvent("porto:draw-sword"));
+      // Fail-open if model/CDN fails or listener isn't mounted yet (common on deploy).
+      clearSwordTimeout();
+      swordTimeoutRef.current = setTimeout(() => {
+        if (!swordDrawingRef.current) return;
+        window.dispatchEvent(new CustomEvent("porto:sword-drawn"));
+      }, 4200);
       return;
     }
 
@@ -100,6 +121,7 @@ export function SceneExhibition({ children }: Props) {
         swordReadyRef.current = false;
         swordDrawingRef.current = false;
         pendingIndexRef.current = null;
+        clearSwordTimeout();
         window.dispatchEvent(new CustomEvent("porto:sheathe-sword"));
       }
     });
@@ -108,6 +130,7 @@ export function SceneExhibition({ children }: Props) {
   // Samurai finished drawing — proceed to the pending scene.
   useEffect(() => {
     const onDrawn = () => {
+      clearSwordTimeout();
       swordReadyRef.current = true;
       swordDrawingRef.current = false;
       animatingRef.current = false;
@@ -117,7 +140,10 @@ export function SceneExhibition({ children }: Props) {
       if (pending != null) goTo(pending);
     };
     window.addEventListener("porto:sword-drawn", onDrawn);
-    return () => window.removeEventListener("porto:sword-drawn", onDrawn);
+    return () => {
+      window.removeEventListener("porto:sword-drawn", onDrawn);
+      clearSwordTimeout();
+    };
   }, [goTo]);
 
   const next = useCallback(() => {

@@ -21,7 +21,7 @@ export function LoadingScreen() {
 
   useEffect(() => {
     // Warm the samurai model cache during the boot screen.
-    void fetch("/samurai.glb?v=3", { credentials: "same-origin" }).catch(() => {});
+    void fetch("/samurai.glb", { credentials: "same-origin" }).catch(() => {});
   }, []);
 
   useEffect(() => {
