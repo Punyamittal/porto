@@ -3,10 +3,12 @@
 import { motion } from "framer-motion";
 import { SCENE_IDS, SCENE_META } from "@/lib/scenes";
 import { useExhibition } from "@/components/exhibition/SceneExhibition";
+import { useApp } from "@/components/providers/AppProvider";
 import { cn } from "@/lib/utils";
 
 export function SceneHUD() {
   const { active, index, goTo, next, prev, animating } = useExhibition();
+  const { visitorCount } = useApp();
   const meta = SCENE_META[active];
 
   return (
@@ -63,13 +65,20 @@ export function SceneHUD() {
       </div>
 
       <div className="pointer-events-none fixed right-0 bottom-[max(1rem,env(safe-area-inset-bottom))] left-0 z-[80] flex items-center justify-between px-4 sm:px-8">
-        <p className="font-pixel max-w-[45%] truncate text-[7px] text-[var(--fg)]/50 uppercase sm:max-w-none sm:text-[8px]">
-          <span className="text-electric">{meta.label}</span>
-          <span className="ml-2 sm:ml-3">
-            {String(index + 1).padStart(2, "0")}/
-            {String(SCENE_IDS.length).padStart(2, "0")}
-          </span>
-        </p>
+        <div className="min-w-0">
+          <p className="font-pixel max-w-[45%] truncate text-[7px] text-[var(--fg)]/50 uppercase sm:max-w-none sm:text-[8px]">
+            <span className="text-electric">{meta.label}</span>
+            <span className="ml-2 sm:ml-3">
+              {String(index + 1).padStart(2, "0")}/
+              {String(SCENE_IDS.length).padStart(2, "0")}
+            </span>
+          </p>
+          {visitorCount > 0 && (
+            <p className="font-pixel mt-1 text-[7px] text-neon uppercase sm:text-[8px]">
+              VIEWERS {visitorCount.toLocaleString()}
+            </p>
+          )}
+        </div>
 
         <div className="pointer-events-auto flex gap-2">
           <button

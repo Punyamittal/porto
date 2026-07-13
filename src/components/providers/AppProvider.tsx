@@ -62,9 +62,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
-    setVisitorCount(10000 + Math.floor(Math.random() * 89999));
     setTrackName(TRACKS[Math.floor(Math.random() * TRACKS.length)]);
     musicRef.current = createMusicEngine();
+
+    // True visitor count (server increments once per browser) + offset.
+    fetch("/api/views", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((data: { count?: number }) => {
+        if (typeof data.count === "number") setVisitorCount(data.count);
+      })
+      .catch(() => undefined);
 
     const savedTheme = localStorage.getItem("porto-theme") as Theme | null;
     const savedPalette = localStorage.getItem("porto-palette") as Palette | null;
