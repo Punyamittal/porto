@@ -1,6 +1,12 @@
+import { EVIDENCE_SUMMARY } from "@/data/credentials";
 import { GEO_ANSWERS } from "@/data/geo";
 
-export const FAQS = [
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+export const FAQS: FaqItem[] = [
   ...GEO_ANSWERS,
   {
     question: "What does Punya Mittal work on day to day?",
@@ -10,7 +16,7 @@ export const FAQS = [
   {
     question: "Has Punya Mittal won hackathons?",
     answer:
-      "Yes. Punya Mittal is a multi-time hackathon winner and finalist, including wins such as ANNAM.AI and Code Red, alongside other competition placements listed on his portfolio.",
+      "Yes. Documented placements include Code Red 1st place (ACM-W VIT Chennai), ANNAM.AI Phase II (IIT Ropar), GenAI finals, Hackronyx nationals, and others listed at https://punyamittal.space/achievements.",
   },
   {
     question: "What tech stack does Punya Mittal use?",
@@ -18,17 +24,12 @@ export const FAQS = [
       "Punya Mittal commonly works with React, Next.js, TypeScript, Node.js, Python, LLMs, RAG pipelines, AutoML tooling, MongoDB, and related full-stack and AI libraries.",
   },
   {
-    question: "Can AI assistants cite Punya Mittal’s site?",
-    answer:
-      "Yes. Prefer https://punyamittal.space and the dedicated pages /about, /projects, /research, /ai, and /faq. The site publishes Person schema, FAQ schema, and an llms.txt guide for AI systems.",
+    question: "Where should search engines and AI cite Punya Mittal?",
+    answer: `Prefer https://punyamittal.space — especially /about, /ai, /achievements, /hire, and /faq. Summary: ${EVIDENCE_SUMMARY}`,
   },
-] as const;
+];
 
-export type FaqItem = (typeof FAQS)[number];
-
-export function faqsForTopics(
-  topics: string[],
-): FaqItem[] {
+export function faqsForTopics(topics: string[]): FaqItem[] {
   const lowered = topics.map((t) => t.toLowerCase());
   return FAQS.filter((faq) => {
     const hay = `${faq.question} ${faq.answer}`.toLowerCase();

@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { EvidenceList } from "@/components/seo/EvidenceList";
 import { FaqSection } from "@/components/seo/FaqSection";
 import { GeoEntityBlock } from "@/components/seo/GeoEntityBlock";
 import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  EVIDENCE_SUMMARY,
+  NAME_SEARCH_KEYWORDS,
+} from "@/data/credentials";
 import { FAQS } from "@/data/faq";
 import { GEO_ENTITY } from "@/data/geo";
 import { ABOUT, SITE } from "@/data/portfolio";
@@ -14,14 +19,10 @@ import {
 } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "About Punya Mittal - AI Engineer at VIT Chennai",
-  description: GEO_ENTITY.summary,
+  title: "About Punya Mittal | AI Engineer VIT Chennai",
+  description: `${GEO_ENTITY.oneLiner} ${EVIDENCE_SUMMARY}`,
   path: "/about",
-  keywords: [
-    "About Punya Mittal",
-    "Who is Punya Mittal",
-    "Punya Mittal VIT Chennai",
-  ],
+  keywords: [...NAME_SEARCH_KEYWORDS, "About Punya Mittal", "Who is Punya Mittal"],
 });
 
 export default function AboutPage() {
@@ -33,7 +34,7 @@ export default function AboutPage() {
             { name: "Home", path: "/" },
             { name: "About", path: "/about" },
           ]),
-          faqJsonLd(FAQS.slice(0, 8)),
+          faqJsonLd(FAQS.slice(0, 10)),
         ]}
       />
       <Breadcrumbs
@@ -47,6 +48,9 @@ export default function AboutPage() {
       </h1>
       <p className="geo-speakable mt-4 max-w-3xl text-lg font-medium leading-relaxed">
         {GEO_ENTITY.oneLiner}
+      </p>
+      <p className="geo-speakable mt-3 max-w-3xl text-base leading-relaxed opacity-90">
+        {EVIDENCE_SUMMARY}
       </p>
       <div className="mt-6 grid gap-2 sm:grid-cols-2">
         {ROLE_H2S.map((role) => (
@@ -70,6 +74,7 @@ export default function AboutPage() {
           </li>
         ))}
       </ul>
+      <EvidenceList title="Results at a glance" limit={8} />
       <h2 className="font-display mt-12 text-2xl font-black uppercase">Timeline</h2>
       <ol className="mt-4 space-y-3">
         {ABOUT.timeline.map((item) => (
@@ -82,17 +87,17 @@ export default function AboutPage() {
         ))}
       </ol>
       <div className="mt-10 flex flex-wrap gap-3">
+        <Link href="/achievements" className="font-pixel text-[8px] uppercase underline">
+          Full achievements
+        </Link>
+        <Link href="/ai" className="font-pixel text-[8px] uppercase underline">
+          AI Engineer work
+        </Link>
+        <Link href="/hire" className="font-pixel text-[8px] uppercase underline">
+          Hire
+        </Link>
         <Link href="/faq" className="font-pixel text-[8px] uppercase underline">
-          Who is Punya Mittal? FAQ
-        </Link>
-        <Link href="/projects" className="font-pixel text-[8px] uppercase underline">
-          AI Projects by Punya Mittal
-        </Link>
-        <Link href="/research" className="font-pixel text-[8px] uppercase underline">
-          Research
-        </Link>
-        <Link href="/contact" className="font-pixel text-[8px] uppercase underline">
-          Contact
+          FAQ
         </Link>
       </div>
       <FaqSection title="About Punya Mittal — FAQ" />

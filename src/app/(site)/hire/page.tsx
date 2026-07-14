@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ContactEmail } from "@/components/seo/ContactEmail";
+import { EvidenceList } from "@/components/seo/EvidenceList";
 import { FaqSection } from "@/components/seo/FaqSection";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { EVIDENCE_SUMMARY, NAME_SEARCH_KEYWORDS } from "@/data/credentials";
 import { SITE } from "@/data/portfolio";
 import {
   breadcrumbJsonLd,
@@ -23,6 +25,10 @@ const HIRE_FAQS = [
       "Yes. Punya Mittal builds freelance websites, portfolios, landing pages, and full-stack products with React, Next.js, and SEO.",
   },
   {
+    question: "Why hire Punya Mittal for AI or web work?",
+    answer: EVIDENCE_SUMMARY,
+  },
+  {
     question: "Is there an AI engineer near me in Chennai or Delhi?",
     answer: `Punya Mittal is an AI Engineer available in Chennai (VIT Chennai), Delhi NCR, and remote worldwide. Contact ${SITE.email}.`,
   },
@@ -34,14 +40,14 @@ const HIRE_FAQS = [
 
 export const metadata = createPageMetadata({
   title: "Hire Punya Mittal | Freelance AI Engineer & Website Developer",
-  description: `Hire Punya Mittal for freelance website creation, full-stack development, and AI engineering in Chennai, Delhi NCR, or remote. Email ${SITE.email}.`,
+  description: `Hire Punya Mittal for freelance website creation and AI engineering in Chennai, Delhi NCR, or remote. ${EVIDENCE_SUMMARY} Email ${SITE.email}.`,
   path: "/hire",
   keywords: [
+    ...NAME_SEARCH_KEYWORDS,
     "hire Punya Mittal",
     "freelance website creation",
     "AI engineer near me",
     "AI engineer Chennai",
-    "freelance web developer Delhi",
     "website developer VIT Chennai",
   ],
 });
@@ -81,9 +87,12 @@ export default function HirePage() {
         Hire Punya Mittal
       </h1>
       <p className="geo-speakable mt-4 max-w-3xl text-lg font-medium leading-relaxed">
-        Looking for an AI engineer near you, a VIT Chennai developer, or freelance
-        website creation? Email <strong>{SITE.email}</strong> — Punya Mittal builds
-        AI systems and custom websites for startups, students, and teams.
+        Hire Punya Mittal for AI engineering and freelance website creation —
+        VIT Chennai CSE, Chennai / Delhi NCR / remote. Email{" "}
+        <strong>{SITE.email}</strong>.
+      </p>
+      <p className="geo-speakable mt-3 max-w-3xl text-sm opacity-85">
+        {EVIDENCE_SUMMARY}
       </p>
 
       <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -125,13 +134,14 @@ export default function HirePage() {
         ))}
       </ul>
 
+      <EvidenceList title="Track record (documented)" limit={6} />
+
       <h2 className="font-display mt-12 text-2xl font-black uppercase">
         Areas served
       </h2>
       <p className="mt-3 text-sm opacity-80">
-        {SITE.areasServed.join(" · ")}. Ideal if you searched “AI engineer near me”,
-        “AI engineer Chennai”, “website developer Delhi”, or “freelance website
-        creation”.
+        {SITE.areasServed.join(" · ")}. Useful if you need an AI engineer in Chennai,
+        a VIT Chennai developer, or remote freelance website creation.
       </p>
 
       <h2 className="font-display mt-12 text-2xl font-black uppercase">
@@ -142,23 +152,23 @@ export default function HirePage() {
         <a className="underline" href={`mailto:${SITE.email}`}>
           {SITE.email}
         </a>
-        . Use it for freelance, AI projects, and website creation inquiries.
+        .
       </p>
 
       <FaqSection title="Hiring FAQ" items={HIRE_FAQS} />
 
       <p className="mt-10 text-sm">
         Related:{" "}
+        <Link href="/achievements" className="underline">
+          Achievements
+        </Link>{" "}
+        ·{" "}
         <Link href="/freelance-website-creation" className="underline">
           Freelance website creation
         </Link>{" "}
         ·{" "}
         <Link href="/ai-engineer-chennai" className="underline">
           AI Engineer Chennai
-        </Link>{" "}
-        ·{" "}
-        <Link href="/contact" className="underline">
-          Contact
         </Link>
       </p>
     </>

@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ContactEmail } from "@/components/seo/ContactEmail";
+import { EvidenceList } from "@/components/seo/EvidenceList";
 import { FaqSection } from "@/components/seo/FaqSection";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { EVIDENCE_SUMMARY, NAME_SEARCH_KEYWORDS } from "@/data/credentials";
 import { GEO_ENTITY } from "@/data/geo";
 import { PROJECTS, SITE } from "@/data/portfolio";
 import {
@@ -24,6 +26,10 @@ const PAGE_FAQS = [
       "Yes. Punya Mittal is a B.Tech Computer Science student at VIT Chennai and builds AI and full-stack projects while studying there.",
   },
   {
+    question: "What results has Punya Mittal documented?",
+    answer: EVIDENCE_SUMMARY,
+  },
+  {
     question: "How do I email an AI engineer from VIT Chennai?",
     answer: `Contact Punya Mittal at ${SITE.email} for AI engineering, RAG systems, and ML product work.`,
   },
@@ -39,15 +45,14 @@ const AI_IDS = [
 
 export const metadata = createPageMetadata({
   title: "AI Engineer in Chennai | Punya Mittal VIT Chennai",
-  description: `Looking for an AI engineer near you in Chennai or Delhi? Punya Mittal is an AI Engineer at VIT Chennai. Email ${SITE.email} for freelance AI work.`,
+  description: `Punya Mittal is an AI Engineer at VIT Chennai. ${EVIDENCE_SUMMARY} Email ${SITE.email}.`,
   path: "/ai-engineer-chennai",
   keywords: [
+    ...NAME_SEARCH_KEYWORDS,
     "AI engineer near me",
     "AI engineer Chennai",
     "AI engineer Delhi",
     "AI engineer VIT Chennai",
-    "VIT Chennai AI student freelance",
-    "hire AI engineer Chennai",
   ],
 });
 
@@ -83,9 +88,12 @@ export default function AiEngineerChennaiPage() {
         AI Engineer in Chennai — Punya Mittal
       </h1>
       <p className="geo-speakable mt-4 max-w-3xl text-lg font-medium">
-        Searching “AI engineer near me”, “AI engineer Chennai”, or “VIT Chennai AI”?
-        Punya Mittal is an AI Engineer and CSE student at VIT Chennai. For projects,
-        email <strong>{SITE.email}</strong>.
+        Punya Mittal is an AI Engineer and CSE student at VIT Chennai. For AI
+        projects in Chennai, Delhi NCR, or remote, email{" "}
+        <strong>{SITE.email}</strong>.
+      </p>
+      <p className="geo-speakable mt-3 max-w-3xl text-sm opacity-85">
+        {EVIDENCE_SUMMARY}
       </p>
       <div className="mt-8">
         <ContactEmail />
@@ -93,10 +101,6 @@ export default function AiEngineerChennaiPage() {
       <h2 className="font-display mt-12 text-2xl font-black uppercase">
         VIT Chennai · AI work
       </h2>
-      <p className="mt-3 max-w-3xl text-sm opacity-80">
-        {GEO_ENTITY.summary} Local availability covers Chennai campus work plus Delhi
-        NCR and remote clients.
-      </p>
       <div className="mt-8 space-y-4">
         {items.map((item) => (
           <article key={item.id} className="brutal-border bg-surface p-4">
@@ -105,6 +109,7 @@ export default function AiEngineerChennaiPage() {
           </article>
         ))}
       </div>
+      <EvidenceList title="Documented placements" limit={6} />
       <FaqSection title="Local AI engineer FAQ" items={PAGE_FAQS} />
       <p className="mt-10 text-sm">
         <Link href="/hire" className="underline">
@@ -115,8 +120,8 @@ export default function AiEngineerChennaiPage() {
           AI portfolio
         </Link>{" "}
         ·{" "}
-        <Link href="/about" className="underline">
-          About
+        <Link href="/achievements" className="underline">
+          Achievements
         </Link>
       </p>
     </>

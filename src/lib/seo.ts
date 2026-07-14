@@ -59,6 +59,7 @@ export const SEO_ROUTES = [
   { path: "/contact", title: "Contact", priority: 0.7, changeFrequency: "yearly" as const },
   { path: "/resume", title: "Resume", priority: 0.75, changeFrequency: "monthly" as const },
   { path: "/faq", title: "FAQ", priority: 0.95, changeFrequency: "weekly" as const },
+  { path: "/achievements", title: "Achievements", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/hire", title: "Hire", priority: 0.95, changeFrequency: "weekly" as const },
   {
     path: "/freelance-website-creation",

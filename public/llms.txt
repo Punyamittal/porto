@@ -15,6 +15,7 @@ Punya Mittal builds AI systems, blockchain applications, and full-stack software
 hello@punyamittal.space
 
 ## Hire / local intent
+- Achievements: https://punyamittal.space/achievements
 - Hire: https://punyamittal.space/hire
 - Freelance website creation: https://punyamittal.space/freelance-website-creation
 - AI Engineer Chennai: https://punyamittal.space/ai-engineer-chennai
@@ -53,4 +54,6 @@ hello@punyamittal.space
 - Location: Greater Delhi Area / VIT Chennai, India
 - Areas served: Chennai, Delhi NCR, India, Remote
 - Founder: Y-SoC
+- Documented results: Code Red #1 (ACM-W VIT Chennai), ANNAM.AI Phase II (IIT Ropar), NPTEL Top 1%, MSME Top 40, SRIP 2026, Y-SoC founder
+- Achievements page: https://punyamittal.space/achievements
 - Focus: AI / ML, full-stack, freelance websites, open source, blockchain experiments
