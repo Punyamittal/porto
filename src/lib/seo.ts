@@ -120,7 +120,7 @@ export function personJsonLd() {
     name: "Punya Mittal",
     alternateName: ["Punya Mittal AI", "Punya Mittal VIT"],
     url: SITE_URL,
-    image: `${SITE_URL}/favicon.ico`,
+    image: `${SITE_URL}/favicon.png`,
     jobTitle: ["AI Engineer", "Full Stack Developer"],
     description:
       "Punya Mittal is an AI Engineer, Full Stack Developer, and Computer Science student at VIT Chennai. Founder of Y-SoC.",
@@ -169,7 +169,7 @@ export function professionalServiceJsonLd() {
     "@id": `${SITE_URL}/#services`,
     name: "Punya Mittal — Freelance AI & Website Development",
     url: `${SITE_URL}/hire`,
-    image: `${SITE_URL}/favicon.ico`,
+    image: `${SITE_URL}/favicon.png`,
     description:
       "Freelance website creation, full-stack development, and AI engineering services by Punya Mittal — available in Chennai, Delhi NCR, and remote worldwide.",
     email: SITE.email,

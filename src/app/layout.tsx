@@ -52,6 +52,11 @@ export const metadata: Metadata = {
   creator: "Punya Mittal",
   publisher: "Punya Mittal",
   alternates: { canonical: SITE_URL },
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: "Punya Mittal | AI Engineer | Full Stack Developer | VIT Chennai",
     description:
