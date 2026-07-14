@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { EvidenceList } from "@/components/seo/EvidenceList";
-import { FaqSection } from "@/components/seo/FaqSection";
 import { GeoEntityBlock } from "@/components/seo/GeoEntityBlock";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { LorSection } from "@/components/seo/LorSection";
@@ -9,13 +8,11 @@ import {
   EVIDENCE_SUMMARY,
   NAME_SEARCH_KEYWORDS,
 } from "@/data/credentials";
-import { FAQS } from "@/data/faq";
 import { GEO_ENTITY } from "@/data/geo";
 import { ABOUT, SITE } from "@/data/portfolio";
 import {
   breadcrumbJsonLd,
   createPageMetadata,
-  faqJsonLd,
   ROLE_H2S,
 } from "@/lib/seo";
 
@@ -30,13 +27,10 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd
-        data={[
-          breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "About", path: "/about" },
-          ]),
-          faqJsonLd(FAQS.slice(0, 10)),
-        ]}
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ])}
       />
       <Breadcrumbs
         items={[
@@ -105,7 +99,6 @@ export default function AboutPage() {
           FAQ
         </Link>
       </div>
-      <FaqSection title="About Punya Mittal — FAQ" />
     </>
   );
 }
