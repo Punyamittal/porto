@@ -34,7 +34,7 @@ const AI_FAQS = [
   {
     question: "Has Punya Mittal placed in AI-related competitions?",
     answer:
-      "Yes. Documented results include ANNAM.AI Phase II (IIT Ropar), GenAI Hackathon finals (ML Mumbai), Code Red 1st place at VIT Chennai, and related national selections listed on his achievements page.",
+      "Yes. Documented results include 4th place at ANNAM.AI Hackathon 2025 (IIT Ropar), GenAI Hackathon finals (ML Mumbai), Code Red 1st place at VIT Chennai, and related national selections listed on his achievements page.",
   },
 ] as const;
 

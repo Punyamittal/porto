@@ -19,4 +19,4 @@ export const NAME_SEARCH_KEYWORDS = [
 ] as const;
 
 export const EVIDENCE_SUMMARY =
-  "Punya Mittal is a VIT Chennai CSE student and AI Engineer with documented results: Code Red 1st place (ACM-W VIT Chennai), ANNAM.AI Phase II placement (IIT Ropar), NPTEL Top 1% (IIT Kanpur), MSME Idea Hackathon Top 40, SRIP research selection, and founder of Y-SoC.";
+  "Punya Mittal is a VIT Chennai CSE student and AI Engineer with documented results: Code Red 1st place (ACM-W VIT Chennai), 4th place at ANNAM.AI Hackathon 2025 (IIT Ropar / Ministry of Education CoE), NPTEL Top 1% (IIT Kanpur), MSME Idea Hackathon Top 40, SRIP research selection, and founder of Y-SoC.";

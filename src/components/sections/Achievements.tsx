@@ -98,6 +98,16 @@ export function Achievements() {
                         ? ach.description
                         : "Secret achievement — keep exploring"}
                     </p>
+                    {isUnlocked && "url" in ach && ach.url && (
+                      <a
+                        href={ach.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-pixel mt-2 inline-block text-[7px] uppercase underline"
+                      >
+                        Official page →
+                      </a>
+                    )}
                     <p className="font-pixel mt-2 text-[8px] text-electric">
                       +{ach.points} PTS
                     </p>

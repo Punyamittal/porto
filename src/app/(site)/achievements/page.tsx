@@ -14,6 +14,8 @@ export const metadata = createPageMetadata({
     ...NAME_SEARCH_KEYWORDS,
     "Punya Mittal hackathon",
     "Code Red VIT Chennai",
+    "ANNAM.AI Hackathon 2025",
+    "ANNAM.AI 4th place",
     "ANNAM.AI Punya Mittal",
     "Y-SoC founder",
   ],

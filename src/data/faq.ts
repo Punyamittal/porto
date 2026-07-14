@@ -16,7 +16,7 @@ export const FAQS: FaqItem[] = [
   {
     question: "Has Punya Mittal won hackathons?",
     answer:
-      "Yes. Documented placements include Code Red 1st place (ACM-W VIT Chennai), ANNAM.AI Phase II (IIT Ropar), GenAI finals, Hackronyx nationals, and others listed at https://punyamittal.space/achievements.",
+      "Yes. Documented placements include Code Red 1st place (ACM-W VIT Chennai), 4th place at ANNAM.AI Hackathon 2025 (IIT Ropar), GenAI finals, Hackronyx nationals, and others listed at https://punyamittal.space/achievements.",
   },
   {
     question: "What tech stack does Punya Mittal use?",

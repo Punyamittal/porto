@@ -39,7 +39,7 @@ export const ABOUT = {
   ],
   timeline: [
     { year: "2026", event: "Full Stack Intern @ JBN · SRIP research · Hospital AI / RAG work" },
-    { year: "2025", event: "Founded Y-SoC · ANNAM.AI winner · Code Red #1 · CTO @ AUTOMATA" },
+    { year: "2025", event: "Founded Y-SoC · ANNAM.AI Hackathon 2025 4th place · Code Red #1 · CTO @ AUTOMATA" },
     { year: "2024", event: "Started B.Tech at VIT · First GenAI workshop @ IIT Madras" },
     { year: "2010–24", event: "Sachdeva Public School · Sports Captain · CBSE" },
   ],
@@ -152,10 +152,10 @@ export const PROJECTS = [
     description:
       "AgroTwin Nexus — AI precision agriculture project from ANNAM.AI / IIT Ropar internship.",
     longDescription:
-      "Redesigning Indian agriculture with AI-powered precision: gene-editing insights + real-time digital twin ecosystems for sustainable farming. Featured on Annam AI's official blog.",
+      "Redesigning Indian agriculture with AI-powered precision: gene-editing insights + real-time digital twin ecosystems for sustainable farming. Built for ANNAM.AI Hackathon 2025 (4th place) at IIT Ropar — CoE of the Ministry of Education.",
     tech: ["AgriTech", "AI", "Digital Twins", "Sustainability"],
     sticker: "NEW" as const,
-    liveUrl: "https://annam.ai/blog/",
+    liveUrl: "https://www.annam.ai/hackathon-2025",
     githubUrl: "https://github.com/punyamittal",
     color: "#39FF14",
     year: "2025",
@@ -393,11 +393,13 @@ export const ACHIEVEMENTS = [
   },
   {
     id: "annam-win",
-    title: "ANNAM.AI TOP 5",
-    description: "4th place · ₹2,00,000 · Phase II research track @ IIT Ropar",
+    title: "ANNAM.AI 4TH PLACE",
+    description:
+      "4th place — ANNAM.AI Hackathon 2025 · CoE of Ministry of Education @ IIT Ropar",
     icon: "🌾",
     unlocked: true,
     points: 950,
+    url: "https://www.annam.ai/hackathon-2025",
   },
   {
     id: "nptel",

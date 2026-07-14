@@ -31,6 +31,16 @@ export function EvidenceList({
               {item.title}
             </p>
             <p className="mt-2 text-sm opacity-85">{item.description}</p>
+            {"url" in item && typeof item.url === "string" && item.url && (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-pixel mt-3 inline-block text-[7px] uppercase underline opacity-70 hover:opacity-100"
+              >
+                Official page →
+              </a>
+            )}
           </li>
         ))}
       </ul>
