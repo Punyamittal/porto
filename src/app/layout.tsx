@@ -65,12 +65,21 @@ export const metadata: Metadata = {
     siteName: "Punya Mittal",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "/favicon.png",
+        width: 720,
+        height: 720,
+        alt: "Punya Mittal",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Punya Mittal | AI Engineer | Full Stack Developer | VIT Chennai",
     description:
       "AI Engineer and Full Stack Developer at VIT Chennai — projects, research, and open source.",
+    images: ["/favicon.png"],
   },
   robots: {
     index: true,

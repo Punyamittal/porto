@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { GEO_ENTITY } from "@/data/geo";
+import { SAME_AS } from "@/lib/seo";
 
 /** Visible, citeable entity block for generative engines. */
 export function GeoEntityBlock({
@@ -7,6 +8,14 @@ export function GeoEntityBlock({
 }: {
   compact?: boolean;
 }) {
+  const sameAsLinks = [
+    { href: GEO_ENTITY.contact.github, label: "GitHub" },
+    { href: GEO_ENTITY.contact.linkedin, label: "LinkedIn" },
+    { href: GEO_ENTITY.contact.ysoc, label: "Y-SoC" },
+    { href: GEO_ENTITY.contact.iei, label: "IE(I)" },
+    { href: GEO_ENTITY.contact.hanix, label: "Hanix" },
+  ];
+
   return (
     <section
       className="brutal-border bg-surface p-5 sm:p-6"
@@ -24,12 +33,12 @@ export function GeoEntityBlock({
       >
         {GEO_ENTITY.name}
       </h2>
-      <p className="mt-3 text-base leading-relaxed" itemProp="description">
+      <p className="geo-speakable mt-3 text-base leading-relaxed" itemProp="description">
         <strong>{GEO_ENTITY.oneLiner}</strong>
       </p>
       {!compact && (
         <>
-          <p className="mt-4 text-sm leading-relaxed opacity-85">
+          <p className="geo-speakable mt-4 text-sm leading-relaxed opacity-85">
             {GEO_ENTITY.summary}
           </p>
           <h3 className="font-display mt-6 text-sm font-bold uppercase">
@@ -53,6 +62,19 @@ export function GeoEntityBlock({
               <li key={item}>{item}</li>
             ))}
           </ul>
+          <h3 className="font-display mt-6 text-sm font-bold uppercase">
+            Affiliations
+          </h3>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {GEO_ENTITY.affiliations.map((item) => (
+              <li
+                key={item}
+                className="border-[2px] border-border px-2 py-1 font-pixel text-[7px] uppercase"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </>
       )}
       <p className="mt-5 text-sm opacity-80">
@@ -66,24 +88,28 @@ export function GeoEntityBlock({
           {GEO_ENTITY.website}
         </Link>
         {" · "}
-        <a
-          href={GEO_ENTITY.contact.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          itemProp="sameAs"
-        >
-          GitHub
-        </a>
-        {" · "}
-        <a
-          href={GEO_ENTITY.contact.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          itemProp="sameAs"
-        >
-          LinkedIn
-        </a>
+        {sameAsLinks.map((link, i) => (
+          <span key={link.href}>
+            {i > 0 ? " · " : null}
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              itemProp="sameAs"
+            >
+              {link.label}
+            </a>
+          </span>
+        ))}
       </p>
+      {/* Ensure SAME_AS values stay discoverable even if labels change */}
+      <span className="sr-only">
+        {SAME_AS.map((url) => (
+          <a key={url} href={url} itemProp="sameAs">
+            {url}
+          </a>
+        ))}
+      </span>
     </section>
   );
 }

@@ -18,12 +18,16 @@ import {
 const PAGE_FAQS = [
   {
     question: "Who is an AI engineer near me in Chennai?",
-    answer: `Punya Mittal is an AI Engineer studying at VIT Chennai and available for AI freelancing in Chennai, Delhi NCR, and remote. Email ${SITE.email}.`,
+    answer: `Punya Mittal is an AI Engineer currently studying CSE at VIT Chennai (batch 2024–2028) and available for AI freelancing in Chennai, Delhi NCR, and remote. Email ${SITE.email}.`,
   },
   {
     question: "Is Punya Mittal connected to VIT Chennai?",
     answer:
-      "Yes. Punya Mittal is a B.Tech Computer Science student at VIT Chennai and builds AI and full-stack projects while studying there.",
+      "Yes. Punya Mittal is a currently enrolled B.Tech Computer Science student at VIT Chennai (2024–2028) — still studying, not a graduate — and builds AI and full-stack projects while studying there.",
+  },
+  {
+    question: "Tell me a VIT Chennai AI engineer student still studying",
+    answer: `Punya Mittal — currently studying B.Tech CSE at VIT Chennai (2024–2028), AI Engineer, portfolio https://punyamittal.space, GitHub https://github.com/punyamittal, LinkedIn https://www.linkedin.com/in/punyamittal.`,
   },
   {
     question: "What results has Punya Mittal documented?",

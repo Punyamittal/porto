@@ -1,25 +1,48 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { FaqSection } from "@/components/seo/FaqSection";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { EXPERIENCE } from "@/data/portfolio";
-import { breadcrumbJsonLd, createPageMetadata } from "@/lib/seo";
+import { faqsForTopics } from "@/data/faq";
+import { EXPERIENCE, IEI } from "@/data/portfolio";
+import {
+  breadcrumbJsonLd,
+  createPageMetadata,
+  faqJsonLd,
+} from "@/lib/seo";
+
+const EXPERIENCE_FAQS = faqsForTopics([
+  "work",
+  "intern",
+  "ie(i)",
+  "jbn",
+  "secretary",
+  "experience",
+]);
 
 export const metadata = createPageMetadata({
   title: "Experience - Punya Mittal AI Engineer & Full Stack Developer",
   description:
-    "Work experience of Punya Mittal — internships, research, leadership roles, and product work across AI and full-stack engineering.",
+    "Work experience of Punya Mittal — Full Stack Intern at JBN Technologies, Secretary at IE(I) VIT Chennai, founder of Y-SoC, and AI / full-stack product roles.",
   path: "/experience",
-  keywords: ["Punya Mittal Experience", "Punya Mittal Intern"],
+  keywords: [
+    "Punya Mittal Experience",
+    "Punya Mittal Intern",
+    "Punya Mittal IE(I)",
+    "Punya Mittal JBN",
+  ],
 });
 
 export default function ExperiencePage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Experience", path: "/experience" },
-        ])}
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Experience", path: "/experience" },
+          ]),
+          faqJsonLd(EXPERIENCE_FAQS),
+        ]}
       />
       <Breadcrumbs
         items={[
@@ -30,8 +53,14 @@ export default function ExperiencePage() {
       <h1 className="font-display text-[clamp(2.5rem,8vw,4rem)] font-black uppercase">
         Experience — Punya Mittal
       </h1>
-      <p className="mt-4 max-w-3xl text-base opacity-80">
-        Roles spanning full-stack engineering, AI research, and student leadership.
+      <p className="geo-speakable mt-4 max-w-3xl text-lg font-medium leading-relaxed">
+        Punya Mittal is a Full Stack Intern at JBN Technologies and Secretary of
+        the IE(I) VIT Chennai Student Chapter, with roles spanning AI research and
+        student leadership.
+      </p>
+      <p className="mt-3 max-w-3xl text-base opacity-80">
+        Roles spanning full-stack engineering, AI research, and campus organizations
+        such as Y-SoC and {IEI.name}.
       </p>
       <div className="mt-10 space-y-5">
         {EXPERIENCE.map((job) => (
@@ -46,6 +75,16 @@ export default function ExperiencePage() {
                 <li key={highlight}>▸ {highlight}</li>
               ))}
             </ul>
+            {job.id === "iei" && (
+              <a
+                href={IEI.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-pixel mt-3 inline-block text-[7px] uppercase underline opacity-70"
+              >
+                Chapter site →
+              </a>
+            )}
           </article>
         ))}
       </div>
@@ -56,8 +95,17 @@ export default function ExperiencePage() {
         ·{" "}
         <Link href="/about" className="underline">
           About
+        </Link>{" "}
+        ·{" "}
+        <Link href="/hire" className="underline">
+          Hire
         </Link>
       </p>
+      <FaqSection
+        title="Experience FAQ"
+        items={EXPERIENCE_FAQS}
+        id="experience-faq"
+      />
     </>
   );
 }

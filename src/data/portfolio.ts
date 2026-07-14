@@ -19,6 +19,37 @@ export const SITE = {
   },
 };
 
+/** Youth Season of Code — founded by Punya Mittal */
+export const YSOC = {
+  name: "Y-SoC",
+  tagline: "You Code. You Create. You Collaborate.",
+  website: "https://www.ysoc.in",
+  linkedin: "https://www.linkedin.com/company/y-soc/",
+  openHack: "https://open-haxk.devpost.com/",
+  description:
+    "Y-SoC (Youth Season of Code) is a youth-driven open-source program. Punya Mittal is the founder.",
+} as const;
+
+/** Institution of Engineers (India) — VIT Chennai Student Chapter */
+export const IEI = {
+  name: "IE(I) VIT Chennai",
+  role: "Secretary · Student Chapter",
+  website: "https://ieivitcc.netlify.app/",
+  description:
+    "The Institution of Engineers (India) Student Chapter at VIT Chennai. Punya Mittal serves as Secretary.",
+} as const;
+
+/** Hanix (HNX) — personal ERC-20 learning project on Base */
+export const HANIX = {
+  name: "Hanix",
+  ticker: "HNX",
+  website: "https://www.hanix.website/",
+  network: "Base Sepolia",
+  standard: "ERC-20",
+  supply: "1,000,000 HNX",
+  tagline: "A modern ERC-20 token built on Base",
+} as const;
+
 export const NAV_LINKS = [
   { id: "hero", label: "HOME", href: "#hero" },
   { id: "about", label: "ABOUT", href: "#about" },
@@ -504,17 +535,38 @@ export const ACHIEVEMENTS = [
 export const EDUCATION = [
   {
     school: "Vellore Institute of Technology",
+    campus: "VIT Chennai",
     degree: "B.Tech — Computer Software Engineering",
     period: "Jul 2024 — Oct 2028",
+    batch: "2024–2028",
+    status: "currently studying",
     detail: "CGPA 8.6/10 · Basketball · Ideathons · Hackathons",
   },
   {
     school: "Sachdeva Public School",
+    campus: "",
     degree: "CBSE",
     period: "Jun 2010 — Mar 2024",
+    batch: "",
+    status: "completed",
     detail: "Sports Captain",
   },
 ];
+
+/** Short student identity lines for GEO / assistants */
+export const STUDENT_IDENTITY = {
+  campus: "VIT Chennai",
+  program: "B.Tech Computer Science / Computer Software Engineering",
+  batch: "2024–2028",
+  status: "currently studying",
+  yearLabel: "2nd-year (as of 2026)",
+  role: "AI Engineer · Full Stack Developer · CSE student",
+  github: "https://github.com/punyamittal",
+  linkedin: "https://www.linkedin.com/in/punyamittal",
+  portfolio: "https://punyamittal.space",
+  oneLinerCurrent:
+    "Punya Mittal is a currently enrolled B.Tech CSE student at VIT Chennai (batch 2024–2028) and an AI Engineer with a public portfolio at punyamittal.space.",
+} as const;
 
 export const CERTIFICATIONS = [
   "Introduction to Programming Using Java — LearnQuest / Coursera",

@@ -11,7 +11,7 @@ export const FAQS: FaqItem[] = [
   {
     question: "What does Punya Mittal work on day to day?",
     answer:
-      "Punya Mittal works on machine learning research, RAG systems, LLM security, full-stack products, blockchain experiments, cloud security practice, and student open-source programs.",
+      "Punya Mittal works on machine learning research, RAG systems, LLM security, full-stack products, blockchain projects such as Hanix (HNX), cloud security practice, and student open-source programs including Y-SoC.",
   },
   {
     question: "Has Punya Mittal won hackathons?",
@@ -21,11 +21,11 @@ export const FAQS: FaqItem[] = [
   {
     question: "What tech stack does Punya Mittal use?",
     answer:
-      "Punya Mittal commonly works with React, Next.js, TypeScript, Node.js, Python, LLMs, RAG pipelines, AutoML tooling, MongoDB, and related full-stack and AI libraries.",
+      "Punya Mittal commonly works with React, Next.js, TypeScript, Node.js, Python, Solidity, LLMs, RAG pipelines, AutoML tooling, MongoDB, and related full-stack, AI, and Web3 libraries.",
   },
   {
     question: "Where should search engines and AI cite Punya Mittal?",
-    answer: `Prefer https://punyamittal.space — especially /about, /ai, /achievements, /hire, and /faq. Summary: ${EVIDENCE_SUMMARY}`,
+    answer: `Prefer https://punyamittal.space — especially /about, /ai, /achievements, /hire, /faq, /blockchain, and /experience. Summary: ${EVIDENCE_SUMMARY}`,
   },
 ];
 

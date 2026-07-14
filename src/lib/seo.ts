@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE } from "@/data/portfolio";
+import { HANIX, IEI, SITE, STUDENT_IDENTITY, YSOC } from "@/data/portfolio";
 
 export const SITE_URL = "https://punyamittal.space";
 
@@ -14,6 +14,7 @@ export const DEFAULT_KEYWORDS = [
   "Punya Mittal Full Stack Developer",
   "Punya Mittal Research",
   "Punya Mittal Blockchain",
+  "Punya Mittal Hanix",
   "Punya Mittal freelance",
   "hire Punya Mittal",
   "AI Engineer Chennai",
@@ -27,6 +28,8 @@ export const DEFAULT_KEYWORDS = [
   "VIT Chennai",
   "Machine Learning",
   "Blockchain",
+  "Hanix",
+  "Y-SoC",
   "React",
   "Next.js",
   "Open Source",
@@ -43,7 +46,18 @@ export const SAME_AS = [
   SITE.social.github,
   SITE.social.linkedin,
   SITE.social.ysoc,
+  YSOC.linkedin,
+  YSOC.openHack,
+  IEI.website,
+  HANIX.website,
 ] as const;
+
+export const OG_IMAGE = {
+  url: `${SITE_URL}/favicon.png`,
+  width: 720,
+  height: 720,
+  alt: "Punya Mittal — AI Engineer | Full Stack Developer | VIT Chennai",
+} as const;
 
 export const SEO_ROUTES = [
   { path: "/", title: "Home", priority: 1, changeFrequency: "weekly" as const },
@@ -71,6 +85,12 @@ export const SEO_ROUTES = [
     path: "/ai-engineer-chennai",
     title: "AI Engineer Chennai",
     priority: 0.9,
+    changeFrequency: "weekly" as const,
+  },
+  {
+    path: "/vit-chennai-ai-engineer-student",
+    title: "VIT Chennai AI Engineer Student",
+    priority: 0.95,
     changeFrequency: "weekly" as const,
   },
 ] as const;
@@ -103,11 +123,13 @@ export function createPageMetadata({
       siteName: "Punya Mittal",
       type: "website",
       locale: "en_US",
+      images: [OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [OG_IMAGE.url],
     },
   };
 }
@@ -118,21 +140,22 @@ export function personJsonLd() {
     "@type": "Person",
     "@id": `${SITE_URL}/#person`,
     name: "Punya Mittal",
-    alternateName: ["Punya Mittal AI", "Punya Mittal VIT"],
+    alternateName: ["Punya Mittal AI", "Punya Mittal VIT", "Punya Mittal VIT Chennai"],
     url: SITE_URL,
-    image: `${SITE_URL}/favicon.png`,
-    jobTitle: ["AI Engineer", "Full Stack Developer"],
-    description:
-      "Punya Mittal is an AI Engineer, Full Stack Developer, and Computer Science student at VIT Chennai. Founder of Y-SoC.",
-    alumniOf: {
+    image: OG_IMAGE.url,
+    jobTitle: [
+      "AI Engineer",
+      "Full Stack Developer",
+      "Computer Science Student",
+      "Secretary",
+    ],
+    description: STUDENT_IDENTITY.oneLinerCurrent,
+    memberOf: {
       "@type": "CollegeOrUniversity",
       name: "VIT Chennai",
+      alternateName: "Vellore Institute of Technology Chennai",
       sameAs: "https://chennai.vit.ac.in/",
     },
-    affiliation: [
-      { "@type": "Organization", name: "Y-SoC", url: "https://www.ysoc.in" },
-      { "@type": "Organization", name: "VIT Chennai" },
-    ],
     knowsAbout: [
       "Artificial Intelligence",
       "Machine Learning",
@@ -142,8 +165,46 @@ export function personJsonLd() {
       "React",
       "Next.js",
       "Blockchain",
+      "ERC-20",
+      "Base",
+      "Solidity",
       "Cloud Security",
       "Open Source",
+    ],
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "AI Engineer",
+      occupationLocation: {
+        "@type": "Place",
+        name: "Chennai / Delhi NCR / Remote",
+      },
+    },
+    affiliation: [
+      {
+        "@type": "Organization",
+        name: YSOC.name,
+        url: YSOC.website,
+        sameAs: [YSOC.linkedin, YSOC.openHack],
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        name: "VIT Chennai",
+        sameAs: "https://chennai.vit.ac.in/",
+      },
+      {
+        "@type": "Organization",
+        name: IEI.name,
+        url: IEI.website,
+      },
+      {
+        "@type": "Organization",
+        name: "JBN Technologies",
+      },
+      {
+        "@type": "Organization",
+        name: `${HANIX.name} (${HANIX.ticker})`,
+        url: HANIX.website,
+      },
     ],
     nationality: { "@type": "Country", name: "India" },
     email: SITE.email,
@@ -169,7 +230,7 @@ export function professionalServiceJsonLd() {
     "@id": `${SITE_URL}/#services`,
     name: "Punya Mittal — Freelance AI & Website Development",
     url: `${SITE_URL}/hire`,
-    image: `${SITE_URL}/favicon.png`,
+    image: OG_IMAGE.url,
     description:
       "Freelance website creation, full-stack development, and AI engineering services by Punya Mittal — available in Chennai, Delhi NCR, and remote worldwide.",
     email: SITE.email,
@@ -245,11 +306,6 @@ export function websiteJsonLd() {
     author: { "@id": `${SITE_URL}/#person` },
     publisher: { "@id": `${SITE_URL}/#person` },
     inLanguage: "en",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${SITE_URL}/blog?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { PUBLIC_CREDENTIALS } from "@/data/credentials";
 
 export function EvidenceList({

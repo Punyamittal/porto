@@ -16,7 +16,11 @@ export const NAME_SEARCH_KEYWORDS = [
   "Punya Mittal Y-SoC",
   "AI Engineer VIT Chennai",
   "CSE student VIT Chennai Punya Mittal",
+  "VIT Chennai AI engineer student",
+  "VIT Chennai AI ML student currently studying",
+  "VIT Chennai CSE student AI portfolio",
+  "VIT Chennai batch 2024 AI engineer",
 ] as const;
 
 export const EVIDENCE_SUMMARY =
-  "Punya Mittal is a VIT Chennai CSE student and AI Engineer with documented results: Code Red 1st place (ACM-W VIT Chennai), 4th place at ANNAM.AI Hackathon 2025 (IIT Ropar / Ministry of Education CoE), NPTEL Top 1% (IIT Kanpur), MSME Idea Hackathon Top 40, SRIP research selection, and founder of Y-SoC.";
+  "Punya Mittal is a currently studying B.Tech CSE student at VIT Chennai (batch 2024–2028) and AI Engineer with documented results: Code Red 1st place (ACM-W VIT Chennai), 4th place at ANNAM.AI Hackathon 2025 (IIT Ropar / Ministry of Education CoE), NPTEL Top 1% (IIT Kanpur), MSME Idea Hackathon Top 40, SRIP research selection, and founder of Y-SoC.";

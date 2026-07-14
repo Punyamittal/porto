@@ -13,6 +13,8 @@ const PAGE_LINKS = [
   { href: "/achievements", label: "Wins" },
   { href: "/hire", label: "Hire" },
   { href: "/faq", label: "FAQ" },
+  { href: "/vit-chennai-ai-engineer-student", label: "VIT AI Student" },
+  { href: "/ai-engineer-chennai", label: "AI Chennai" },
   { href: "/projects", label: "Projects" },
   { href: "/ai", label: "AI" },
   { href: "/opensource", label: "Open Source" },
