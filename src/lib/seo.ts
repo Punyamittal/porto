@@ -14,6 +14,14 @@ export const DEFAULT_KEYWORDS = [
   "Punya Mittal Full Stack Developer",
   "Punya Mittal Research",
   "Punya Mittal Blockchain",
+  "Punya Mittal freelance",
+  "hire Punya Mittal",
+  "AI Engineer Chennai",
+  "AI Engineer Delhi",
+  "AI Engineer near me",
+  "freelance website creation",
+  "freelance website developer Chennai",
+  "website developer VIT Chennai",
   "AI Engineer",
   "Full Stack Developer",
   "VIT Chennai",
@@ -50,6 +58,20 @@ export const SEO_ROUTES = [
   { path: "/blog", title: "Blog", priority: 0.85, changeFrequency: "weekly" as const },
   { path: "/contact", title: "Contact", priority: 0.7, changeFrequency: "yearly" as const },
   { path: "/resume", title: "Resume", priority: 0.75, changeFrequency: "monthly" as const },
+  { path: "/faq", title: "FAQ", priority: 0.95, changeFrequency: "weekly" as const },
+  { path: "/hire", title: "Hire", priority: 0.95, changeFrequency: "weekly" as const },
+  {
+    path: "/freelance-website-creation",
+    title: "Freelance Website Creation",
+    priority: 0.9,
+    changeFrequency: "weekly" as const,
+  },
+  {
+    path: "/ai-engineer-chennai",
+    title: "AI Engineer Chennai",
+    priority: 0.9,
+    changeFrequency: "weekly" as const,
+  },
 ] as const;
 
 export function createPageMetadata({
@@ -93,24 +115,119 @@ export function personJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": `${SITE_URL}/#person`,
     name: "Punya Mittal",
+    alternateName: ["Punya Mittal AI", "Punya Mittal VIT"],
     url: SITE_URL,
-    jobTitle: "AI Engineer",
+    image: `${SITE_URL}/favicon.ico`,
+    jobTitle: ["AI Engineer", "Full Stack Developer"],
     description:
-      "AI Engineer, Full Stack Developer, and Computer Science student at VIT Chennai.",
+      "Punya Mittal is an AI Engineer, Full Stack Developer, and Computer Science student at VIT Chennai. Founder of Y-SoC.",
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: "VIT Chennai",
+      sameAs: "https://chennai.vit.ac.in/",
     },
+    affiliation: [
+      { "@type": "Organization", name: "Y-SoC", url: "https://www.ysoc.in" },
+      { "@type": "Organization", name: "VIT Chennai" },
+    ],
     knowsAbout: [
       "Artificial Intelligence",
       "Machine Learning",
+      "Large Language Models",
+      "Retrieval Augmented Generation",
       "Full Stack Development",
+      "React",
+      "Next.js",
       "Blockchain",
       "Cloud Security",
       "Open Source",
     ],
+    nationality: { "@type": "Country", name: "India" },
+    email: SITE.email,
+    homeLocation: {
+      "@type": "Place",
+      name: "Greater Delhi Area / Chennai, India",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      addressCountry: "IN",
+    },
     sameAs: [...SAME_AS],
+    mainEntityOfPage: SITE_URL,
+  };
+}
+
+export function professionalServiceJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${SITE_URL}/#services`,
+    name: "Punya Mittal — Freelance AI & Website Development",
+    url: `${SITE_URL}/hire`,
+    image: `${SITE_URL}/favicon.ico`,
+    description:
+      "Freelance website creation, full-stack development, and AI engineering services by Punya Mittal — available in Chennai, Delhi NCR, and remote worldwide.",
+    email: SITE.email,
+    priceRange: "$$",
+    founder: { "@id": `${SITE_URL}/#person` },
+    employee: { "@id": `${SITE_URL}/#person` },
+    areaServed: SITE.areasServed.map((name) => ({
+      "@type": "Place",
+      name,
+    })),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      addressCountry: "IN",
+    },
+    availableLanguage: ["English", "Hindi"],
+    sameAs: [...SAME_AS],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      email: SITE.email,
+      url: `${SITE_URL}/contact`,
+      availableLanguage: ["English", "Hindi"],
+      areaServed: SITE.areasServed,
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Freelance services by Punya Mittal",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Freelance website creation",
+            description:
+              "Custom portfolio, business, and product websites with Next.js, React, and SEO.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "AI engineering",
+            description:
+              "LLM apps, RAG systems, AutoML pipelines, and applied machine learning builds.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Full-stack product development",
+            description:
+              "End-to-end web apps for startups, campuses, and research teams.",
+          },
+        },
+      ],
+    },
   };
 }
 
@@ -118,12 +235,20 @@ export function websiteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
     name: "Punya Mittal",
+    alternateName: "Punya Mittal Portfolio",
     url: SITE_URL,
     description:
       "Official portfolio of Punya Mittal — AI Engineer and Full Stack Developer at VIT Chennai.",
-    author: { "@type": "Person", name: "Punya Mittal" },
+    author: { "@id": `${SITE_URL}/#person` },
+    publisher: { "@id": `${SITE_URL}/#person` },
     inLanguage: "en",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_URL}/blog?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
   };
 }
 

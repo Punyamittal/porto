@@ -126,7 +126,12 @@ export function Footer() {
             </a>
           ))}
         </div>
-        <p className="font-pixel text-[8px] text-bg/60">{SITE.email}</p>
+        <a
+          href={`mailto:${SITE.email}`}
+          className="font-pixel text-[8px] text-bg/60 underline"
+        >
+          {SITE.email}
+        </a>
       </div>
     </footer>
   );

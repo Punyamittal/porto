@@ -45,7 +45,12 @@ export default function AiPage() {
       <h2 className="font-display mt-4 text-xl font-bold uppercase">
         Machine Learning Systems that Ship
       </h2>
-      <p className="mt-6 max-w-3xl text-base opacity-80">
+      <p className="geo-speakable mt-6 max-w-3xl text-base opacity-90">
+        Is Punya Mittal an AI Engineer? Yes. Punya Mittal builds machine learning
+        systems, RAG applications, LLM security layers, emotion-aware agents, and
+        agri-AI research — with a bias toward evaluated, shippable products.
+      </p>
+      <p className="mt-4 max-w-3xl text-base opacity-80">
         Punya Mittal builds AI products with production instincts: evaluation, safety,
         user impact, and clear technical writing.
       </p>

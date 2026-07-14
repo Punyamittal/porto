@@ -5,8 +5,10 @@ export const SITE = {
   title: "AI Engineer | Full Stack Developer",
   subtitle:
     "Student at VIT Chennai · Founder @Y-SoC · Building AI systems that ship to the real world",
-  email: "via LinkedIn / GitHub",
+  /** Public inbox — wire DNS/forwarding on punyamittal.space so mailto works. */
+  email: "hello@punyamittal.space",
   location: "Greater Delhi Area / VIT Chennai",
+  areasServed: ["Chennai", "Delhi NCR", "India", "Remote"],
   resumeUrl: "https://github.com/punyamittal",
   headline:
     "Student at VIT | Intern @JBN Technologies | Former @ANNAM.ai @Analytx4t | Co-founder @HackFinity @AUTOMATA | Founder @Y-SoC | 2× Hackathon Winner | Secretary @IE(I) VIT",

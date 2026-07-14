@@ -4,11 +4,12 @@ import { SITE } from "@/data/portfolio";
 const LINKS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/hire", label: "Hire" },
+  { href: "/faq", label: "FAQ" },
   { href: "/projects", label: "Projects" },
   { href: "/research", label: "Research" },
   { href: "/ai", label: "AI" },
   { href: "/experience", label: "Experience" },
-  { href: "/opensource", label: "Open Source" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ] as const;

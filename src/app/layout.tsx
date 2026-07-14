@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Press_Start_2P, IBM_Plex_Mono } from "next/font/google";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { personJsonLd, SITE_URL, websiteJsonLd } from "@/lib/seo";
+import {
+  personJsonLd,
+  professionalServiceJsonLd,
+  SITE_URL,
+  websiteJsonLd,
+} from "@/lib/seo";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -92,7 +97,7 @@ export default function RootLayout({
         <link rel="preload" href="/draco/draco_decoder.wasm" as="fetch" crossOrigin="anonymous" />
       </head>
       <body className="min-h-full font-display antialiased">
-        <JsonLd data={[personJsonLd(), websiteJsonLd()]} />
+        <JsonLd data={[personJsonLd(), websiteJsonLd(), professionalServiceJsonLd()]} />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[10002] focus:bg-electric focus:px-3 focus:py-2 focus:text-black"

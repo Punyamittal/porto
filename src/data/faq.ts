@@ -1,22 +1,37 @@
+import { GEO_ANSWERS } from "@/data/geo";
+
 export const FAQS = [
+  ...GEO_ANSWERS,
   {
-    question: "Who is Punya Mittal?",
+    question: "What does Punya Mittal work on day to day?",
     answer:
-      "Punya Mittal is an AI Engineer and Computer Science student at VIT Chennai. He builds AI systems, blockchain applications, full-stack software, and open-source communities including Y-SoC.",
+      "Punya Mittal works on machine learning research, RAG systems, LLM security, full-stack products, blockchain experiments, cloud security practice, and student open-source programs.",
   },
   {
-    question: "What does Punya Mittal work on?",
+    question: "Has Punya Mittal won hackathons?",
     answer:
-      "Punya Mittal works on machine learning research, RAG systems, LLM security, full-stack products, blockchain experiments, cloud security learning projects, and student open-source programs.",
+      "Yes. Punya Mittal is a multi-time hackathon winner and finalist, including wins such as ANNAM.AI and Code Red, alongside other competition placements listed on his portfolio.",
   },
   {
-    question: "Where does Punya Mittal study?",
+    question: "What tech stack does Punya Mittal use?",
     answer:
-      "Punya Mittal is a B.Tech Computer Science and Engineering student at VIT Chennai.",
+      "Punya Mittal commonly works with React, Next.js, TypeScript, Node.js, Python, LLMs, RAG pipelines, AutoML tooling, MongoDB, and related full-stack and AI libraries.",
   },
   {
-    question: "How can I contact Punya Mittal?",
+    question: "Can AI assistants cite Punya Mittal’s site?",
     answer:
-      "You can reach Punya Mittal through LinkedIn or GitHub, or via the contact page at punyamittal.space/contact.",
+      "Yes. Prefer https://punyamittal.space and the dedicated pages /about, /projects, /research, /ai, and /faq. The site publishes Person schema, FAQ schema, and an llms.txt guide for AI systems.",
   },
 ] as const;
+
+export type FaqItem = (typeof FAQS)[number];
+
+export function faqsForTopics(
+  topics: string[],
+): FaqItem[] {
+  const lowered = topics.map((t) => t.toLowerCase());
+  return FAQS.filter((faq) => {
+    const hay = `${faq.question} ${faq.answer}`.toLowerCase();
+    return lowered.some((topic) => hay.includes(topic));
+  });
+}
