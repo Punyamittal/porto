@@ -1,12 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, Moon, Sun, Volume2, VolumeX, X } from "lucide-react";
 import { SITE } from "@/data/portfolio";
 import { NAV_SCENES, type SceneId } from "@/lib/scenes";
 import { useApp } from "@/components/providers/AppProvider";
 import { useExhibition } from "@/components/exhibition/SceneExhibition";
 import { cn } from "@/lib/utils";
+
+const PAGE_LINKS = [
+  { href: "/about", label: "About" },
+  { href: "/achievements", label: "Wins" },
+  { href: "/hire", label: "Hire" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/projects", label: "Projects" },
+  { href: "/ai", label: "AI" },
+  { href: "/opensource", label: "Open Source" },
+  { href: "/blockchain", label: "Blockchain" },
+  { href: "/blog", label: "Blog" },
+  { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
+] as const;
 
 export function Navigation() {
   const {
@@ -20,6 +34,8 @@ export function Navigation() {
   } = useApp();
   const { active, goTo, animating } = useExhibition();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [pagesOpen, setPagesOpen] = useState(false);
+  const pagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -32,7 +48,26 @@ export function Navigation() {
 
   useEffect(() => {
     setMenuOpen(false);
+    setPagesOpen(false);
   }, [active]);
+
+  useEffect(() => {
+    if (!pagesOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPagesOpen(false);
+    };
+    const onPointer = (e: MouseEvent) => {
+      if (pagesRef.current && !pagesRef.current.contains(e.target as Node)) {
+        setPagesOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("mousedown", onPointer);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("mousedown", onPointer);
+    };
+  }, [pagesOpen]);
 
   return (
     <header className="fixed top-0 right-0 left-0 z-[90] border-b-[3px] border-border bg-[var(--bg)]/90 pt-[env(safe-area-inset-top)] backdrop-blur-md">
@@ -74,13 +109,46 @@ export function Navigation() {
         </nav>
 
         <div className="flex items-center gap-1.5">
-          <a
-            href="/about"
-            className="font-pixel hidden border-[3px] border-border bg-surface px-2 py-1.5 text-[7px] uppercase shadow-[2px_2px_0_var(--border)] hover:bg-yellow hover:text-black sm:inline-block"
-            onClick={() => playBlip()}
-          >
-            Pages
-          </a>
+          <div ref={pagesRef} className="relative hidden sm:block">
+            <button
+              type="button"
+              aria-expanded={pagesOpen}
+              aria-haspopup="menu"
+              onClick={() => {
+                playBlip();
+                setPagesOpen((o) => !o);
+              }}
+              className={cn(
+                "font-pixel border-[3px] border-border px-2 py-1.5 text-[7px] uppercase shadow-[2px_2px_0_var(--border)]",
+                pagesOpen
+                  ? "bg-yellow text-black"
+                  : "bg-surface text-[var(--fg)] hover:bg-yellow hover:text-black",
+              )}
+            >
+              Pages
+            </button>
+            {pagesOpen && (
+              <nav
+                aria-label="Content pages"
+                className="absolute top-[calc(100%+0.5rem)] right-0 z-[100] grid w-48 grid-cols-1 gap-1 border-[3px] border-border bg-[var(--bg)] p-2 shadow-[4px_4px_0_var(--border)]"
+              >
+                {PAGE_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => {
+                      playBlip();
+                      setPagesOpen(false);
+                    }}
+                    className="font-pixel border-[2px] border-border bg-surface px-2 py-2 text-[7px] uppercase hover:bg-electric hover:text-black"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </nav>
+            )}
+          </div>
+
           <button
             type="button"
             onClick={toggleSound}
@@ -138,6 +206,26 @@ export function Navigation() {
                 {link.label}
               </button>
             ))}
+          </div>
+          <div className="mx-auto mt-3 max-w-[1400px] border-t-[2px] border-border pt-3">
+            <p className="font-pixel mb-2 text-[7px] uppercase opacity-50">
+              Pages
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {PAGE_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => {
+                    playBlip();
+                    setMenuOpen(false);
+                  }}
+                  className="font-pixel border-[2px] border-border bg-surface px-2 py-1 text-[7px] uppercase"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         </nav>
       )}
