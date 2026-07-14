@@ -1,15 +1,20 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { LorSection } from "@/components/seo/LorSection";
 import { ABOUT, EXPERIENCE, SITE } from "@/data/portfolio";
 import { breadcrumbJsonLd, createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "Resume - Punya Mittal AI Engineer",
   description:
-    "Resume overview for Punya Mittal — AI Engineer, Full Stack Developer, VIT Chennai CSE student, Y-SoC founder.",
+    "Resume overview for Punya Mittal — AI Engineer, Full Stack Developer, VIT Chennai CSE student, Y-SoC founder. Includes letters of recommendation.",
   path: "/resume",
-  keywords: ["Punya Mittal Resume", "Punya Mittal CV"],
+  keywords: [
+    "Punya Mittal Resume",
+    "Punya Mittal CV",
+    "Punya Mittal letter of recommendation",
+  ],
 });
 
 export default function ResumePage() {
@@ -49,6 +54,7 @@ export default function ResumePage() {
           </li>
         ))}
       </ul>
+      <LorSection />
       <h2 className="font-display mt-10 text-2xl font-black uppercase">Skills</h2>
       <p className="mt-3 text-sm opacity-80">{ABOUT.skills.join(" · ")}</p>
       <p className="mt-10 text-sm">

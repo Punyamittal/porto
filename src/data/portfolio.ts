@@ -527,5 +527,38 @@ export const CERTIFICATIONS = [
   "NPTEL Conservation Economics — IIT Kanpur (100%, Top 1%)",
 ];
 
+/** Letters of recommendation / appreciation (GitHub-hosted PDFs). */
+export const LETTERS_OF_RECOMMENDATION = [
+  {
+    id: "uber",
+    org: "Uber",
+    title: "Letter of Recommendation — Uber",
+    detail: "From an Uber employee I worked with",
+    url: "https://github.com/Punyamittal/Letter_of_Recommendation/raw/main/LOR-Punya_Mittal-Uber.pdf",
+  },
+  {
+    id: "blackduck",
+    org: "Black Duck",
+    title: "Letter of Recommendation — Black Duck",
+    detail: "From a Black Duck employee I worked with",
+    url: "https://github.com/Punyamittal/Letter_of_Recommendation/raw/main/Punya_Mittal_Letter_of_Recommendation_Black-Duck.pdf",
+  },
+  {
+    id: "analytx4t",
+    org: "Analytx4t Lab",
+    title: "Letter of Recommendation — Analytx4t",
+    detail: "Recommendation from Analytx4t Lab",
+    url: "https://github.com/Punyamittal/Letter_of_Recommendation/raw/main/LOR_ANALYTX4T.pdf",
+  },
+  {
+    id: "dyo-delhi",
+    org: "DYO Central Delhi",
+    title: "Letter of Appreciation & Recommendation — DYO Central Delhi",
+    detail:
+      "District Youth Officer, Central Delhi — related to REHAB / MY Bharat work",
+    url: "https://github.com/Punyamittal/Letter_of_Recommendation/raw/main/DYO-central-delhi-Letter%20of%20Appreciation%20and%20Recommendation.pdf",
+  },
+] as const;
+
 export type ProjectSticker = "NEW" | "HOT" | "BETA";
 export type SkillRarity = "COMMON" | "RARE" | "EPIC" | "LEGENDARY";

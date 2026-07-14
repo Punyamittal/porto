@@ -4,6 +4,7 @@ import { EvidenceList } from "@/components/seo/EvidenceList";
 import { FaqSection } from "@/components/seo/FaqSection";
 import { GeoEntityBlock } from "@/components/seo/GeoEntityBlock";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { LorSection } from "@/components/seo/LorSection";
 import {
   EVIDENCE_SUMMARY,
   NAME_SEARCH_KEYWORDS,
@@ -75,6 +76,7 @@ export default function AboutPage() {
         ))}
       </ul>
       <EvidenceList title="Results at a glance" limit={8} />
+      <LorSection />
       <h2 className="font-display mt-12 text-2xl font-black uppercase">Timeline</h2>
       <ol className="mt-4 space-y-3">
         {ABOUT.timeline.map((item) => (
@@ -87,6 +89,9 @@ export default function AboutPage() {
         ))}
       </ol>
       <div className="mt-10 flex flex-wrap gap-3">
+        <Link href="/resume" className="font-pixel text-[8px] uppercase underline">
+          Resume & LORs
+        </Link>
         <Link href="/achievements" className="font-pixel text-[8px] uppercase underline">
           Full achievements
         </Link>
