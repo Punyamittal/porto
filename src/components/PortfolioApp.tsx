@@ -18,6 +18,7 @@ import { SceneResearch } from "@/components/exhibition/scenes/SceneResearch";
 import { SceneLeadership } from "@/components/exhibition/scenes/SceneLeadership";
 import { SceneContact } from "@/components/exhibition/scenes/SceneContact";
 
+/** Interactive cinematic experience (client-only). */
 export function PortfolioApp() {
   return (
     <AppProvider>

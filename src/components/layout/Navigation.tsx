@@ -74,6 +74,13 @@ export function Navigation() {
         </nav>
 
         <div className="flex items-center gap-1.5">
+          <a
+            href="/about"
+            className="font-pixel hidden border-[3px] border-border bg-surface px-2 py-1.5 text-[7px] uppercase shadow-[2px_2px_0_var(--border)] hover:bg-yellow hover:text-black sm:inline-block"
+            onClick={() => playBlip()}
+          >
+            Pages
+          </a>
           <button
             type="button"
             onClick={toggleSound}

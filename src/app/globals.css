@@ -20,6 +20,18 @@ html.exhibition-mode body {
   touch-action: pan-y;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 :root {
   --black: #000000;
   --white: #ffffff;

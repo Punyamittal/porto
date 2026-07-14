@@ -61,9 +61,12 @@ export function SceneHero() {
           EXHIBITION / SCENE 01
         </p>
 
-        {/* Name left · Samurai right */}
+        {/* Decorative brand (document H1 lives in server-rendered SEO layer) */}
         <div className="flex items-center gap-2 sm:gap-4 lg:gap-8">
-          <h1 className="font-display min-w-0 flex-1 leading-[0.82] font-bold tracking-[-0.04em] uppercase">
+          <p
+            className="font-display min-w-0 flex-1 leading-[0.82] font-bold tracking-[-0.04em] uppercase"
+            aria-hidden="true"
+          >
             <span className="block text-[clamp(2.2rem,9vw,8.5rem)]">{first}</span>
             <span
               className="mt-1 block text-[clamp(2.2rem,9vw,8.5rem)] text-transparent"
@@ -71,7 +74,7 @@ export function SceneHero() {
             >
               {last}
             </span>
-          </h1>
+          </p>
 
           <div className="relative shrink-0 lg:translate-x-[-18px] lg:translate-y-[48px]">
             <Samurai size="responsive" />
@@ -83,9 +86,10 @@ export function SceneHero() {
 
         <div className="mt-4 h-px w-28 bg-white/80 sm:mt-5 sm:w-48" />
         <div className="mt-4 space-y-1 font-display text-[10px] tracking-[0.22em] text-white/70 uppercase sm:mt-5 sm:text-[11px] sm:tracking-[0.28em]">
-          <p>Full Stack Engineer</p>
-          <p>AI Researcher</p>
-          <p>Open Source Builder</p>
+          <p>AI Engineer</p>
+          <p>Computer Science Student at VIT Chennai</p>
+          <p>Full Stack Developer</p>
+          <p>Open Source Contributor</p>
         </div>
         <p className="mt-4 max-w-[40ch] text-sm leading-relaxed text-white/50 sm:mt-6">
           Building intelligent software systems, scalable web platforms, and

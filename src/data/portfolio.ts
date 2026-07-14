@@ -1,9 +1,10 @@
 export const SITE = {
   name: "Punya Mittal",
   shortName: "PUNYA",
-  title: "Full-Stack × AI Builder",
+  url: "https://punyamittal.space",
+  title: "AI Engineer | Full Stack Developer",
   subtitle:
-    "Student at VIT · Founder @Y-SoC · Building AI systems that ship to the real world",
+    "Student at VIT Chennai · Founder @Y-SoC · Building AI systems that ship to the real world",
   email: "via LinkedIn / GitHub",
   location: "Greater Delhi Area / VIT Chennai",
   resumeUrl: "https://github.com/punyamittal",
