@@ -3,7 +3,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { EVIDENCE_SUMMARY } from "@/data/credentials";
 import { FAQS } from "@/data/faq";
 import { GEO_ENTITY } from "@/data/geo";
-import { ABOUT, SITE } from "@/data/portfolio";
+import { ABOUT } from "@/data/portfolio";
 import {
   createPageMetadata,
   faqJsonLd,
@@ -65,48 +65,14 @@ export default function Home() {
         ]}
       />
 
-      {/* Visible, compact identity band — citeable without relying on sr-only alone */}
-      <section
-        className="relative z-[80] border-b-[3px] border-border bg-[var(--bg)] px-4 py-3 text-[var(--fg)] sm:px-8"
-        aria-label="Punya Mittal identity"
-      >
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-          <div className="min-w-0">
-            <h1 className="font-display text-lg font-black uppercase sm:text-xl">
-              Punya Mittal
-            </h1>
-            <p className="geo-identity-answer geo-speakable mt-1 max-w-3xl text-sm leading-relaxed opacity-85">
-              {GEO_ENTITY.oneLiner}
-            </p>
-            <p className="geo-identity-answer geo-speakable mt-1 max-w-3xl text-xs leading-relaxed opacity-70">
-              {EVIDENCE_SUMMARY}
-            </p>
-          </div>
-          <p className="shrink-0 text-xs opacity-70">
-            <a href={`mailto:${SITE.email}`} className="underline">
-              {SITE.email}
-            </a>
-            {" · "}
-            <a href="/hire" className="underline">
-              Hire
-            </a>
-            {" · "}
-            <a href="/faq" className="underline">
-              FAQ
-            </a>
-            {" · "}
-            <a href="/about" className="underline">
-              About
-            </a>
-          </p>
-        </div>
-      </section>
-
-      {/* Extra structured answers for crawlers / assistants */}
-      <section className="sr-only" aria-label="Additional entity answers for AI and search">
+      {/* Server-rendered for crawlers / generative engines — not shown in the exhibition UI */}
+      <section className="sr-only" aria-label="Punya Mittal identity for AI and search">
+        <h1>Punya Mittal</h1>
         {ROLE_H2S.map((role) => (
           <h2 key={role}>{role}</h2>
         ))}
+        <p className="geo-identity-answer">{GEO_ENTITY.oneLiner}</p>
+        <p className="geo-identity-answer">{EVIDENCE_SUMMARY}</p>
         <p className="geo-identity-answer">{GEO_ENTITY.summary}</p>
         <p>{ABOUT.bio}</p>
         {FAQS.map((faq) => (
