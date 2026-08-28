@@ -1,33 +1,31 @@
 ![Project Banner](docs/readme-agent/banner.svg)
 
-# Porto: Interactive Personal Portfolio
+# Porto: Interactive Retro-Futuristic Portfolio
 
-A highly interactive, dynamic, and retro-futuristic personal portfolio built with Next.js and advanced animation libraries.
+A highly interactive, retro-futuristic personal portfolio built with Next.js, featuring complex animations, a simulated terminal interface, and 3D elements.
 
 ## Overview
 
-Porto is a sophisticated, single-page application designed to serve as a personal portfolio. It emphasizes a dynamic and interactive user experience, utilizing advanced animation techniques (GSAP, Framer Motion) and 3D graphics (Three.js) to create a retro-futuristic, almost game-like browsing experience. The site incorporates interactive elements such as a terminal interface and specific input codes (Konami Code) to reveal hidden content and features.
+Porto is a sophisticated, single-page application designed to function as a personal portfolio. It emphasizes a highly interactive, immersive user experience, utilizing modern web technologies like Next.js and advanced animation libraries (GSAP, Framer Motion). The design aesthetic is described as retro-futuristic, incorporating elements such as a simulated terminal interface and complex visual effects. While the project structure suggests a focus on client-side rendering and complex state management, the underlying system diagrams hint at a potential expansion into data processing or security dashboard functionality, though the current evidence points to a consumer-facing portfolio.
 
 ## Key Features
 
-- Dynamic and interactive user experience
-- Integration of 3D graphics using Three.js and React-Three-Fiber
-- Advanced animation capabilities using GSAP and Framer Motion
-- Terminal-based interaction system (e.g., typing 'help', 'projects')
-- Hidden content activation via specific inputs (e.g., Konami Code, double-clicking the logo, pressing '?' key)
-- Multiple viewing modes, including a 'Retro Mode' activated by Alt+R
+- Interactive User Experience: The portfolio is designed to be highly engaging, incorporating visual feedback and animations.
+- Terminal Simulation: Includes a simulated command-line interface for interaction.
+- Advanced Animations: Utilizes libraries like GSAP and Framer Motion for complex, choreographed animations.
+- 3D Visualization: Incorporates WebGL capabilities via React Three Fiber/Drei, suggesting 3D scene rendering.
+- Easter Eggs: The README mentions the inclusion of interactive elements like the Konami Code and color cycling.
 
 ## Technology Stack
 
 - Next.js
-- React
 - TypeScript
 - Tailwind CSS
+- React
 - Framer Motion
 - GSAP
-- Three.js
-- React-Three-Fiber
-- Lucide-React
+- React Three Fiber
+- Drei
 
 # Porto
 
