@@ -1,5 +1,34 @@
 ![Project Banner](docs/readme-agent/banner.svg)
 
+# Porto: Interactive Personal Portfolio
+
+A highly interactive, dynamic, and retro-futuristic personal portfolio built with Next.js and advanced animation libraries.
+
+## Overview
+
+Porto is a sophisticated, single-page application designed to serve as a personal portfolio. It emphasizes a dynamic and interactive user experience, utilizing advanced animation techniques (GSAP, Framer Motion) and 3D graphics (Three.js) to create a retro-futuristic, almost game-like browsing experience. The site incorporates interactive elements such as a terminal interface and specific input codes (Konami Code) to reveal hidden content and features.
+
+## Key Features
+
+- Dynamic and interactive user experience
+- Integration of 3D graphics using Three.js and React-Three-Fiber
+- Advanced animation capabilities using GSAP and Framer Motion
+- Terminal-based interaction system (e.g., typing 'help', 'projects')
+- Hidden content activation via specific inputs (e.g., Konami Code, double-clicking the logo, pressing '?' key)
+- Multiple viewing modes, including a 'Retro Mode' activated by Alt+R
+
+## Technology Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- GSAP
+- Three.js
+- React-Three-Fiber
+- Lucide-React
+
 # Porto
 
 Interactive personal portfolio built with **Next.js**, **TypeScript**, **Tailwind CSS**, **Framer Motion**, and **GSAP**.
@@ -120,19 +149,19 @@ graph TB
     end
 
     subgraph Charts["Metrics & Dashboard Charts"]
-        attack_stats["Attack detection stats"]
-        risk_trajectory["Risk trajectory chart"]
-        eval_metrics["Evaluation metrics"]
-        benchmark_p99["Benchmark p99 chart"]
-        dashboard_kpis["Dashboard KPI cards"]
-        ops_snapshot["Live ops snapshot"]
+        page_views["Page views chart"]
+        nav_sections["Navigation sections map"]
+        project_showcase["Project showcase grid"]
+        skills_timeline["Skills & experience timeline"]
+        contact_funnel["Contact conversion funnel"]
+        media_gallery["Media & assets gallery"]
     end
 
     user --> api_client
     api_client --> Core
     user -->|Web UI| dashboard_kpis
-    Core --> attack_stats
-    attack_stats --> user
+    Core --> page_views
+    page_views --> user
 ```
 
 ### Data Flow & Charts Pipeline
@@ -150,21 +179,19 @@ flowchart LR
     end
 
     subgraph Metrics["Metrics & Chart Feeds"]
-        attack_stats["Attack detection stats"]
-        risk_trajectory["Risk trajectory chart"]
-        eval_metrics["Evaluation metrics"]
-        benchmark_p99["Benchmark p99 chart"]
-        dashboard_kpis["Dashboard KPI cards"]
-        ops_snapshot["Live ops snapshot"]
-        confusion_matrix["Model confusion matrix"]
-        latency_hist["Latency histogram"]
+        page_views["Page views chart"]
+        nav_sections["Navigation sections map"]
+        project_showcase["Project showcase grid"]
+        skills_timeline["Skills & experience timeline"]
+        contact_funnel["Contact conversion funnel"]
+        media_gallery["Media & assets gallery"]
     end
 
     IN --> p0
     p2 --> OUT["Authorized Output"]
     OUT --> U
-    p2 --> attack_stats
-    attack_stats --> U
+    p2 --> page_views
+    page_views --> U
 ```
 
 ### Component & API Map
@@ -176,15 +203,31 @@ graph LR
     end
 ```
 
-### Dashboard Page Map
+### Application Page Map
 
 ```mermaid
 mindmap
-  root((MOVIO Dashboard))
-    Overview
-    Build
-    Evaluate
-    System
+  root((Porto))
+    Home
+      home
+    Profile
+      About
+      Contact
+      Hire
+    Pages
+      Achievements
+      Ai
+      Ai Engineer Chennai
+      Blockchain
+      Cloud Security
+      Experience
+      Faq
+      Freelance Website Creation
+    Work
+      Blog
+      Blog
+      Opensource
+      Projects
 ```
 
 ## Application Pages
@@ -196,9 +239,3 @@ Screenshots captured from the running application. Each page is listed with its 
 Application page at `/`
 
 ![Home](docs/readme-agent/pages/dashboard.png)
-
-#### Results at a glance
-
-Application page at `/(site)/about`
-
-![Results at a glance](docs/readme-agent/pages/site-about.png)
